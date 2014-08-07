@@ -1,0 +1,199 @@
+.showbox1{
+	border: 1px solid #BDBDBD;
+	width: 800px;
+	height: 100px;
+	margin: 0 auto;
+	background: white;
+	margin-bottom: 10px;
+}
+.showbox2{
+	border: 1px solid #BDBDBD;
+	width: 800px;
+	height: 300px;
+	margin: 0 auto;
+	background: white;
+	margin-bottom: 10px;
+}
+.showbox3{
+	border: 1px solid #BDBDBD;
+	width: 800px;
+	min-height: 100px;
+	margin: 0 auto;
+	background: white;
+	margin-bottom: 10px;
+	font-family: calibri;
+	font-size: 13px;
+	padding-bottom: 30px;
+}
+
+.showbox3 td, th{
+	font-size: 13px;
+}
+
+.showbox4{
+	border: 1px solid #BDBDBD;
+	width: 800px;
+	min-height: 100px;
+	margin: 0 auto;
+	background: white;
+	margin-bottom: 10px;
+	font-family: calibri;
+	position: relative;
+}
+
+.title1{
+	width: 100%;
+	background: #F2F2F2;
+	height: 30px;
+	border-bottom: 1px solid #BDBDBD;
+	text-align: left;
+}
+
+.titlecontent{
+	margin: 0 auto;
+	font-family: calibri;
+	font-size: 20;
+	padding: 2px;
+	padding-left: 10px;
+}
+.content{
+	font-size: 15;
+	font-family: calibri;
+	height: 20px;
+	margin: 2px;
+}
+.edit{
+	float: right;
+	font-size: 15;
+	font-family: calibri;
+	margin-right: 5px;
+	margin-top: 5px;
+}
+
+.cinfo{
+	width: 500px;
+	margin: 0 auto;
+	margin-top: 30px;
+}
+
+.cinfo tr{
+	height: 20px;
+}
+
+.lefttd{
+	text-align: right;
+	width: 250px;
+	height: 20px;
+	padding-right: 5px;
+}
+
+.righttd{
+	text-align: left;
+	width: 250px;
+	height: 20px;
+	padding-left: 5px;
+}
+
+.personaldetails{
+	margin-top: 20px;
+	margin-left: 40px;
+}
+
+.personaldetails td{
+	min-width: 160px;
+}
+
+#craftedit option{
+	color: black;
+}
+
+.date{
+	width: 100px;
+}
+
+.workexperience{
+	width: 250px;
+}
+
+.description{
+	width: 400px;
+	height: 60px;
+}
+
+.heading1{
+	text-align: left;
+	margin-left: 40px;
+}
+
+em{
+	font-size: 12;
+	color: gray;
+}
+
+.records{
+	width: 700px;
+	margin: 0px auto;
+	margin-bottom: 15px;
+	border-collapse: collapse;
+}
+.records th,td{
+	text-align: center;
+	line-height: 25px;
+}
+
+.weltext{
+	font-size: 20px;
+	font-family: calibri;
+	font-weight: bold;
+	margin: 0 auto;
+	margin-bottom: 20px;
+	width: 900px;
+	text-align: left;
+	color: rgba(0,0,0,0.6);
+	text-indent: 20px;
+}
+
+.fenye{
+	font-family: calibri;
+	color: blue;
+	font-size: 15px;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.unclickable{
+	font-family: calibri;
+	color: gray;
+	font-size: 15px;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+#fenyediv{
+	float: right;
+	margin-right: 40px;
+	margin-bottom: 10px;
+}
+
+#pageem{
+	position: absolute;
+	left: 380px;
+	bottom: 10px;
+}
+
+table.table.table-striped{
+	width: 100%;
+}
+
+
+
+
+
+#addexperience{
+	float: left;
+	margin-left: 40px;
+}
+#addexperience:hover{
+	cursor: pointer;
+}
+

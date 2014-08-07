@@ -1,0 +1,254 @@
+{% extends 'LyHrmBundle::baseframe.html.twig' %}
+
+
+
+{% block title %}Crewing Report{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+	
+	<div class="row">
+		<div class="small-12 columns">	
+			<h1>Crewing Report <span class="subtitle gray"></span></h1>
+			<hr  />
+			<div class="row">
+				<div class="small-12 columns">
+					<div class="op_chart_field" id="craft_status_pie"></div>
+				</div>
+			</div>
+			<br />
+			<hr  />
+			<br /><br />
+			<div class="row">
+				<div class="medium-6 columns">
+					<div class="op_chart_field" id="nationality_chart"></div>
+				</div>
+				<div class="medium-6 columns">
+					<div class="op_chart_field" id="vessel_chart"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+{% endblock %}	
+
+{% block javascripts %}
+	{{ parent() }}
+	<script src="{{ asset('bundles/hrm/js/echarts-plain.js') }}"></script>
+	<script src="{{ asset('bundles/hrm/js/infographic.js') }}"></script>
+	<script src="{{ asset('bundles/hrm/js/infographic.js') }}"></script>
+	<script src="{{ asset('bundles/hrm/js/macarons.js') }}"></script>
+	<script src="{{ asset('bundles/hrm/js/gray.js') }}"></script>
+	<script src="{{ asset('bundles/hrm/js/shine.js') }}"></script>
+	<script src="{{ asset('bundles/hrm/js/blue.js') }}"></script>
+
+	<script type="text/javascript">
+		var myChart_craft = echarts.init(document.getElementById('craft_status_pie'), infographic);
+	    myChart_craft.setOption({
+	    		title : {
+			        text: 'Craft & Status Distribution',
+			        subtext: 'Total: {{sum}}',
+			        y:'top',
+			        x: 'center'
+			    },
+	        	tooltip : {
+			        trigger: 'item'
+			    },
+			    toolbox: {
+			        show : true,
+			        y: 'top',
+			        feature : {
+			            restore : {show: true},
+			            magicType : {show: true, type: ['line', 'bar']},
+			            saveAsImage : {show: true}
+			        }
+			    },
+			    calculable : true,
+
+			    xAxis : [
+			        {
+			        	axisLabel: {
+				            rotate: 60,
+				        },
+			            type : 'category',
+			            data : [
+			            {% for key,craft in craft_short %}
+			        		'{{key}}',
+			        	{% endfor %}
+	        			]
+			        }
+			    ],
+			    grid: {
+				    x: 40,
+				    y2: 120,
+				},
+			    yAxis : [
+			        {
+			            type : 'value',
+			            position: 'right'
+			        }
+			    ],
+			    series : [
+			        {
+			            name:'Manning Level',
+			            type:'bar',
+			            data:[
+			            {% for key,craft in craft_short %}
+			        		'{{craft}}',
+			        	{% endfor %}
+			        	]
+			        },
+
+			        {
+			            name:'Status Distribution',
+			            type:'pie',
+			            tooltip : {
+			                trigger: 'item',
+			                formatter: '{a} <br/>{b} : {c} ({d}%)'
+			            },
+			            center: [280,140],
+			            radius : [0, 110],
+			            selectedMode : 'single',
+			            itemStyle :{
+			                normal : {
+			                    labelLine : {
+			                        length : 20
+			                    }
+			                }
+			            },
+			            data:[
+			                {% for key,status in status_short %}
+			            		{value:{{status}}, name:'{{key}}'},
+			                {% endfor %}
+			            ]
+			        }
+			    ]
+	        });
+
+		var myChart_nationality = echarts.init(document.getElementById('nationality_chart'), infographic);
+	    myChart_nationality.setOption({
+	        title : {
+		        text: 'Nationality Distribution',
+		        subtext: 'Total: {{sum}}',
+		        x:'left'
+		    },
+		    tooltip : {
+		        trigger: 'item',
+		        formatter: "{a} <br/>{b} : {c} ({d}%)"
+		    },
+		    legend: {
+		        orient : 'vertical',
+		        x : 'right',
+		        data:[
+		        	{% for key,nationality in nationality_short %}
+		        		'{{key}}',
+		        	{% endfor %}
+		        ]
+		    },
+		    toolbox: {
+		    	y : 'bottom',
+		        show : true,
+		        feature : {
+		            restore : {show: true},
+		            saveAsImage : {show: true}
+		        }
+		    },
+		    calculable : true,
+		    series : [
+		        {
+		            name:'Manning Level',
+		            selectedMode : 'single',
+		            type:'pie',
+		            radius : '60%',
+		            center: ['50%', '55%'],
+		            data:[
+		            	{% for key,nationality in nationality_short %}
+		            		{value:{{nationality}}, name:'{{key}}'},
+		                {% endfor %}
+		            ]
+		        }
+		    ]
+	    });
+
+		var myChart_vessel = echarts.init(document.getElementById('vessel_chart'), infographic);
+	    myChart_vessel.setOption({
+	    	title : {
+		        text: 'Company & Vessel Distribution',
+		        subtext: 'Total: {{sum}}',
+		        x:'left'
+		    },
+	    	tooltip : {
+		        show: true,
+		        formatter: "{a} <br/>{b} : {c} ({d}%)"
+		    },
+		    legend: {
+		        orient : 'vertical',
+		        x : 'right',
+		        data:[]
+		    },
+		    toolbox: {
+		        show : true,
+		        y: 'bottom',
+		        feature : {
+		
+		            restore : {show: true},
+		            saveAsImage : {show: true}
+		        }
+		    },
+		    calculable : false,
+		    series : [
+		        {
+		            name:'Company:',
+		            type:'pie',
+		            center : ['50%', '55%'],
+		            selectedMode : 'single',
+		            radius : '58%',
+		            itemStyle : {
+		                normal : {
+		                    label : {
+		                        position : 'inner',
+		                        formatter : function (a,b,c,d) {return (d - 0).toFixed(0) + '%'}
+		                    },
+		                    labelLine : {
+		                        show : false
+		                    }
+		                },
+		                emphasis : {
+		                    label : {
+		                        show : true,
+		                        formatter : "{b}\n{d}%"
+		                    }
+		                }
+		                
+		            },
+		            data:[
+						{% for key,sum in vessel_sum %}		               
+		            		{value: {{ sum }}, name: '{{key}}'},
+		            	{% endfor %}
+		            ]
+		        },
+		        {
+		            name:'Vessel:',
+		            type:'pie',
+		            center : ['50%', '55%'],
+		            radius : ['60%', '63%'],
+		            selectedMode : 'single',
+		            data:[
+		            	{% for company in vessel %}
+		            		{% for key,vessel in company %}
+		            			{value: {{ vessel }}, name:'{{key}}'},
+		            		{% endfor %}
+		            	{% endfor %}
+		            ]
+		        },
+		    ]
+
+		});
+	</script>
+
+{% endblock %}

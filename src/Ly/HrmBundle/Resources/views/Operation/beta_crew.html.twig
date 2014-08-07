@@ -1,0 +1,102 @@
+{% extends 'LyHrmBundle::baseframe.html.twig' %}
+
+
+
+{% block title %}Beta Crew Information{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+	
+	<div class="row">
+		<div class="small-12 columns">	
+			<h1>Beta Crew <span class="subtitle gray">Default sorted by Last Login</span></h1>
+			<hr  />
+
+			<table class="stripe responsive">
+		        <thead>
+		            <tr>
+		                <th>Name</th>
+		                <th>Email</th>
+		                <th>Contact No.</th>
+		                <th>Nationality</th>
+		                <th>Craft</th>
+		                <th>Profile</th>
+		                <th>Last Login</th>
+		            </tr>
+		        </thead>
+		        <tbody>
+		        {% for crew in crew %}
+		            <tr>
+		            	<td>
+		            		<a href="{{ path('beta_crew_detail_page', { id : crew.id }) }}">{{ crew.firstname }} {{ crew.lastname }}</a>
+		            	</td>	
+		                <td>{{ crew.email }}</td>
+		                <td>{{ crew.contactno }}</td>
+		                <td>{{ crew.nationality }}</td>
+		                <td>{{ crew.craft }}</td>
+		                <td>
+		                	{% if crew.betacrewid == 0 %}
+								<span class="gray">Non-updated</span>
+							{% else %}	
+		                		<span class="green">Updated</span>
+		                	{% endif %}
+		                </td>
+		                <td>{{ crew.lastLogin|date() }}</td>             
+		            </tr>
+		        {% endfor %}
+		        </tbody>
+	    	</table>
+	    	
+		    
+		</div>
+	</div>
+    
+	
+       
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	
+	<script type="text/javascript">
+		
+		$(document).ready(function() {
+			
+			$('.addlisthref').click(function(e){
+				e.preventDefault();
+								
+				$obj = $(this);
+				
+				if($(this).find('i').attr('class') == 'fa fa-plus-circle'){	
+					
+					$.post('{{path('ajax_handler')}}',
+						{type: 'addcrewlist', data: $(this).attr('id') }, 
+				            function(response){
+				                    if(response.code == 200 && response.success){//dummy check
+				                      //do something
+										$obj.find('i').attr({'class':'fa fa-minus-circle'
+										});
+				                    }			
+				    }, "json");
+				}
+				
+				else{
+					
+					$.post('{{path('ajax_handler')}}',               
+	                {type: 'deletecrewlist', data: $(this).attr('id') }, 
+				            function(response){
+				                    if(response.code == 200 && response.success){//dummy check
+				                      //do something
+										$obj.find('i').attr('class','fa fa-plus-circle');
+				                    }			
+				    }, "json");
+				}	
+				
+			});
+		});
+	</script>
+{% endblock %}

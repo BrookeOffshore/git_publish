@@ -1,0 +1,137 @@
+{% extends 'LyHrmBundle::baseframe.html.twig' %}
+
+
+
+{% block title %}Client & Vessel List{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+
+
+   
+	<div class="row">
+		<div class="small-12 columns">
+			<h1>Client & Vessel List </h1>
+			<hr />
+			
+			<div class="row">
+				<form action="{{ path('vessel_list_page') }}" method="POST" id="vesselform">
+					{% for client in vessel_list %}
+						<div class="small-3 columns left">
+							<fieldset class="vesselfieldset">
+								<div class="row">
+									<div class="small-12 column">
+										<div class="row">
+									        <div class="small-3 columns">
+									          	<label class="left inline">Company</label>
+									        </div>
+									        <div class="small-9 left columns">
+									          	<input type="text" name="company[]" value="{{ client.company }}"/>
+									        </div>
+									    </div>
+									    <div class="row">
+									        <div class="small-3 columns">
+									          	<label class="left inline">Vessel</label>
+									        </div>
+									        <div class="small-9 left columns">
+									        	<textarea class="vesseltext" name="vessel[]">{{ client.vessel }}</textarea>
+									        	<br />
+									        	<a class="delete label alert right" href="#">Delete</a>
+									        </div>
+									        
+									    </div>
+									</div>
+								</div>
+							</fieldset>
+						</div>
+					{% endfor %}
+				</form>
+			</div>
+			<div class='row'>
+				<div class="small-12 columns">
+					<ul class="button-group radius right">
+					    <li><a href="javascript:{}" class="small button" id="addclient">Add Client</a></li>
+					    <li><a class="small button" onclick="vesselform.submit();">Submit</a></li>
+					</ul>			    			    	 
+		  		</div>
+			</div>
+			
+		</div>
+	</div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	
+	
+<script type="text/javascript">
+	var $addTagLink = $('#addclient');
+
+	$(document).ready(function() {
+	    // Get the ul that holds the collection of tags
+
+	    $addTagLink.on('click', function(e) {
+	        // prevent the link from creating a "#" on the URL
+	        e.preventDefault();
+	        
+			
+	        // add a new tag form (see next code block)
+	       	addTagForm();
+	    });
+	    
+		
+		$(".delete").click(function(e) {
+	    	e.preventDefault();
+	    	
+		    $(this).closest('.small-3').slideUp('normal', function() { $(this).closest('.small-3').remove(); });
+
+		});
+		
+	    
+	});
+	
+	function addTagForm() {
+
+	    var $newform = '<div class="small-3 columns left">\
+<fieldset class="vesselfieldset">\
+<div class="row">\
+<div class="small-12 column">\
+<div class="row">\
+<div class="small-3 columns">\
+<label class="left inline">Company</label>\
+</div>\
+<div class="small-9 left columns">\
+<input type="text" name="company[]" value=""/>\
+</div>\
+</div>\
+<div class="row">\
+<div class="small-3 columns">\
+<label class="left inline">Vessel</label>\
+</div>\
+<div class="small-9 left columns">\
+<textarea class="vesseltext" name="vessel[]"></textarea>\
+<br />\
+<a class="delete label alert right" href="#" onclick="$(this).closest(\'.small-3\').slideUp(function() { $(this).closest(\'.small-3\').remove(); });">Delete</a>\
+</div>\
+</div>\
+</div>\
+</div>\
+</fieldset>\
+</div>';
+
+		$('#vesselform').append($newform);
+		
+	}
+	
+	
+	
+</script>
+{% endblock %}
+
+

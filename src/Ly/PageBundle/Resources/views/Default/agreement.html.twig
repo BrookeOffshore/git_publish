@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Brooke Offshore - The Manpower Solutions Company</title>
+<link href="{{ asset('bundles/pages/stylesheet/main.css') }}" rel="stylesheet" type="text/css" />
+<link rel="shortcut icon" href="{{ asset('logomini.ico') }}">
+<link href='http://fonts.googleapis.com/css?family=Raleway:300,200' rel='stylesheet' type='text/css'>
+<script src="{{ asset('bundles/pages/Scripts/swfobject_modified.js') }}" type="text/javascript"></script>
+</head>
+
+<body class="background_color">
+
+<div class="main_background_image">
+
+		<div class="main_logo">
+        	<img style="margin-left:50px;" src="{{ asset('bundles/pages/images/brooke_offshore_logo.png') }}" />
+        </div>
+        <div class="login_text">
+    		<a style="margin-right:80px;" href="{{ path('home_page') }}" target="_self">BACK TO HOME</a>
+    	</div>
+        <div style="clear:both;"></div>
+        <div id="agreement">
+        	<h1>BROOKE OFFSHORE POLICY</h1>
+        	<p>
+                This policy sets out the basis on which any personal data we collect from you, or that you provide to us, will be processed by us. Please read the following carefully to understand our views and practices regarding your personal data and how we will treat it.
+            </p>
+                
+            
+
+            <h2>Information we may collect from you</h2>
+            <p>
+                We may collect and process the following data about you:
+                Information that you provide by filling in forms on the website to help with the recruitment process. This information will include your name, address, e-mail address, phone numbers, work and education history, full CV and any other documents required.  
+                If you contact us, we may keep a record of that correspondence.
+            </p>
+            <h2>How we use your Personal Information</h2>
+            <p>
+                The information you provide to us will be used by Brooke Offshore PTE LTD for the purpose of assessing your suitability, qualifications and skills, for the possiblility of future employment. We may also use your information to keep you informed by email, telephone and/or mail about possibilities for future work opportunities through Brooke Offshore.
+            </p>
+            <p style="font-family:arial;margin-top:30px;font-size:14px;color:white;">    
+                Please note that all information provided to Brooke Offshore PTE LTD will be used for the purpose of possible future employment through Brooke Offshore. All of the documents that are supplied will be used in our data base for possible employment with our clients. <span>By completing this process there is no garantee that you will be employed.</span>
+            </p>
+            
+            <h2>Contact</h2>
+            <p>
+                Questions, comments and requests regarding this privacy policy please contact brookeoffshore.com.
+            </p>
+        	
+        </div>
+        <div id="checkagree">
+			<input  type="checkbox" id="checktik" onclick="agree()"><span onclick="agree1()">I have read and agree to the BROOKE OFFSHORE POLICY.</span>
+			<button id="next" style="float:right; margin-top:20px;" disabled onclick="next()">Next</button>
+        </div>
+        <script type="text/javascript">
+        	$(document).ready(function()
+        		{
+        			var temo1=document.getElementById('checktik');
+        			var temo2=document.getElementById('next');
+        			temo2.disabled=!temo1.checked;
+        		});
+
+        	function agree()
+        	{
+        		var temo1=document.getElementById('checktik');
+        		var temo2=document.getElementById('next');
+        		temo2.disabled=!temo1.checked;
+        	}
+
+            function agree1()
+            {
+                var temo1=document.getElementById('checktik');
+                var temo2=document.getElementById('next');
+                if(temo1.checked==true)
+                    temo1.checked=false;
+                else
+                    temo1.checked=true;
+                temo2.disabled=!temo1.checked;
+            }
+
+        	function next()
+        	{
+        		window.location.href="{{ path('fos_user_registration_register') }}";
+        	}
+        </script>
+
+</div>
+</body>
+</html>

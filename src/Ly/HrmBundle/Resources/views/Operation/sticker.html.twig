@@ -1,0 +1,34 @@
+{% extends 'LyHrmBundle::baseframe.html.twig' %}
+
+
+
+{% block title %}Notification Page{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+	<br />
+	<div class="row">
+		<div class="small-12 columns">
+			<h1>Notifications <span class="subtitle gray">Notifications, Announcement...</span></h1>
+			<hr />
+			
+			{{ form(form) }}
+		</div>
+
+	</div>		
+	
+
+       
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	{{ tinymce_init() }}
+{% endblock %}
+
+
+
+

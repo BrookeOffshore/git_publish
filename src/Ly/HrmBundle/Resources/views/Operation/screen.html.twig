@@ -1,0 +1,154 @@
+{% extends 'LyHrmBundle::baseframe.html.twig' %}
+
+
+
+{% block title %}Brief Crew Information{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+	
+	<div class="row">
+		<div class="small-12 columns">	
+			<h1>Crew Screen <span class="subtitle gray">Bulk edit or generate mobilization records</span></h1>
+			<hr  />
+			{{ form_start(form, {'attr': {'id': 'form_mobgroup'}}) }}
+			<fieldset class='mobgroupfieldset'>
+				<div class="small-12 columns ">
+			    	<div class="row">
+						<div class="small-6 columns ">		        	
+			        		<div class="row">
+						        <div class="small-3 columns">
+						          	<label class="left inline">{{ form_label(form.record) }}</label>
+						        </div>
+						        <div class="small-7 left columns">
+						          	{{ form_widget(form.record) }}
+						        </div>
+						    </div>
+					    </div>
+					    <div class="small-6 columns ">		        	
+			        		<div class="row">
+						        <div class="small-3 columns">
+						          	<label class="left inline">{{ form_label(form.vessel) }}</label>
+						        </div>
+						        <div class="small-7 left columns">
+						          	{{ form_widget(form.vessel) }}
+						        </div>
+						    </div>
+					    </div>
+					    
+				    </div>
+				</div>
+				<div class="small-12 columns ">
+			    	<div class="row">
+						<div class="small-6 columns ">		        	
+			        		<div class="row">
+						        <div class="small-3 columns">
+						          	<label class="left inline">{{ form_label(form.company) }}</label>
+						        </div>
+						        <div class="small-7 left columns">
+						          	{{ form_widget(form.company) }}
+						        </div>
+						    </div>
+					    </div>
+					    <div class="small-6 columns ">		        	
+			        		<div class="row">
+						        <div class="small-3 columns">
+						          	<label class="left inline">{{ form_label(form.mobdate) }}</label>
+						        </div>
+						        <div class="small-7 left columns">
+						          	{{ form_widget(form.mobdate) }}
+						        </div>
+						    </div>
+					    </div>
+				    </div>
+				</div>
+				<div class="small-12 columns ">
+			    	<div class="row">
+						<div class="small-6 columns ">		        	
+			        		<div class="row">
+						        <div class="small-3 columns">
+						          	<label class="left inline">{{ form_label(form.project) }}</label>
+						        </div>
+						        <div class="small-7 left columns">
+						          	{{ form_widget(form.project) }}
+						        </div>
+						    </div>
+					    </div>
+					    <div class="small-6 columns ">		        	
+			        		<div class="row">
+						        <div class="small-3 columns">
+						          	<label class="left inline">{{ form_label(form.description) }}</label>
+						        </div>
+						        <div class="small-7 left columns">
+						          	{{ form_widget(form.description) }}
+						        </div>
+						    </div>
+					    </div>
+				    </div>
+				</div>		    
+			</fieldset>
+			<table class="stripe responsive">
+	        <thead>
+	            <tr>
+	            	<th></th>
+	                <th>Contract No</th>
+	                <th>Name</th>
+	                <th>Date of Birth</th>
+	                <th>Contact</th>
+	                <th>Nationality</th>
+	                <th>Craft</th>
+	                <th>Passport</th>
+	                <th>POE</th>
+	                
+	            </tr>
+	        </thead>
+	        <tbody>
+	        {% for crew in crew %}
+	            <tr>
+	            	<td><a href="{{ path('screen_action', { 'action' : 'delete', 'id' : crew.id }) }}"><i class="fa fa-times-circle-o"></i></a></td>	            		
+	                <td>{{ crew.contractno }}</td>
+	                <td><a href="{{ path('info_show', {'id' : crew.id }) }}">{{ crew.name }}</a></td>
+	                <td>{{ crew.birthday|date('d/M/Y') }}</td>
+	                <td>{{ crew.contactno }}</td>
+	                <td>{{ crew.nationality }}</td>
+	                <td>{{ crew.craft }}</td>
+	                <td>{{ crew.passportno }}</td>
+	                <td>{{ crew.poe }}</td>
+	                             
+	            </tr>
+	        {% endfor %}
+	        </tbody>
+    	</table>	
+    	
+    	<div class="small-12 columns">
+			<ul class="button-group radius right">
+				<li><a href="{{ path('brief_info') }}" class="button small">Add Candidates</a></li>
+			    <li>{{ form_widget(form.submit) }}</li>
+			</ul>		    	 
+  		</div>
+    					
+		</div>
+		
+		{{ form_end(form) }}	
+	</div>		
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	
+	<script type="text/javascript">
+		$('#ly_hrmbundle_mobgroup_vessel').on('change', function ()
+			{
+			    var label = $(this.options[this.selectedIndex]).closest('optgroup').prop('label');
+			    $('#ly_hrmbundle_mobgroup_company').val(label);
+			});
+	</script>
+{% endblock %}	
+

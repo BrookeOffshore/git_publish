@@ -1,0 +1,84 @@
+{% extends 'LyHrmBundle::clientBaseframe.html.twig' %}
+
+
+
+{% block title %}Crew Page{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+	<div class="row">	
+		<div class="small-12 columns">
+			<h1>Crew Page <span class="subtitle gray">Sorted Crew Brief List</span></h1>
+			<hr />
+			{% if pages == 0 %}
+			<h3 class="light">None.</h3>
+			{% else %}
+			<table class="stripe responsive">
+		        <thead>
+		            <tr>
+		                <th>{% if sort == 'contractno' %} Contract {% else %}<a href="{{ path('client_crew_page', {'sort' : 'contractno' }) }}">Contract</a>{% endif %}</th>
+		                <th>{% if sort == 'name' %} Name {% else %}<a href="{{ path('client_crew_page', {'sort' : 'name'}) }}">Name</a>{% endif %}</th>
+		                <th>{% if sort == 'nationality' %} Nationality {% else %}<a href="{{ path('client_crew_page', {'sort' : 'nationality'}) }}">Nationality</a>{% endif %}</th>
+		                <th>{% if sort == 'craft' %} Craft {% else %}<a href="{{ path('client_crew_page', {'sort' : 'craft'}) }}">Craft</a>{% endif %}</th>
+		                <th id="statusth">{% if sort == 'status' %} Status {% else %}<a href="{{ path('client_crew_page', {'sort' : 'status'}) }}">Status</a>{% endif %}</th>
+		                <th>{% if sort == 'vessel' %} Vessel {% else %}<a href="{{ path('client_crew_page', {'sort' : 'vessel'}) }}">Vessel</a>{% endif %}</th>
+		                
+		            </tr>
+		        </thead>
+		        <tbody>
+		        {% for crew in crew %}
+		            <tr>
+		                <td>{{ crew.contractno }}</td>
+		                <td><a href="{{ path('info_show', {'id' : crew.id }) }}">{{ crew.name }}</a></td>
+		                <td>{{ crew.nationality }}</td>
+		                <td>{{ crew.craft }}</td>
+		                <td>{{ crew.status }}</td>
+		                <td>{{ crew.vessel }}</td>
+		                
+		            </tr>
+		        {% endfor %}
+		        </tbody>
+	    	</table>
+	    	
+		   <ul class="pagination">
+		    	{% if page == 1 %}
+					<li class="arrow unavailable"><a href="#">&laquo;</a></li>
+				{% else %}
+		    		<li class="arrow"><a href="{{ path('client_crew_page', {'sort' : sort, 'page' : page-1 }) }}">&laquo;</a></li>
+		    	{% endif %}	
+			    {% for i in 1..pages %}
+					{% if i == page %}
+						<li class="current"><a href="#">{{ i }}</a></li>
+					{% else %}
+						<li><a href="{{ path('client_crew_page', {'sort' : sort, 'page' : i }) }}">{{ i }}</a></li>
+					{% endif%}	
+				{% endfor %}
+				{% if page == pages %}
+					<li class="arrow unavailable"><a href="#">&raquo;</a></li>
+				{% else %}
+		    		<li class="arrow"><a href="{{ path('client_crew_page', {'sort' : sort, 'page' : page+1 }) }}">&raquo;</a></li>
+		    	{% endif%}
+			</ul>
+			{% endif %}
+				
+		</div>		
+	</div>
+
+
+
+
+
+
+       
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+
+
+{% endblock %}
+

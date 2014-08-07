@@ -1,0 +1,106 @@
+{% extends 'LyHrmBundle::baseframe.html.twig' %}
+
+
+
+{% block title %}Beta Crew Information{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+	
+	<div class="row">
+		<div class="small-12 columns">	
+			<h1>{{ crew.firstname }} {{ crew.lastname }} <span class="subtitle gray">{{ crew.nationality }}</span></h1>
+			<hr />
+
+			{% if crew.betacrewid == 0 %}
+			
+				
+				<br />
+				<h2 class="centered-text gray">Non-Updated</h2>
+				<br />
+				
+				<br />
+			{% else %}
+			
+				<table class="borderedtable">
+					<tbody>
+						<tr><th>Name</th><td>{{ betacrew.name }}</td><th>Nationality</th><td>{{ betacrew.nationality }}</td><th>Craft</th><td>{{ betacrew.craft }}</td><th>Passport No.</th><td>{{ betacrew.passportno }}</td></tr>
+						<tr><th>ID No.</th><td>{{ betacrew.idno }}</td><th>Gender</th><td>{{ betacrew.gender }}</td><th>Date of Birth</th><td>{{ betacrew.birthday|date('d/M/Y') }}</td><th>Place of Birth</th><td>{{ betacrew.placeofbirth }}</td></tr>
+						<tr><th>Passport Issue Date</th><td>{{ betacrew.passportissuedate|date('d/M/Y') }}</td><th>Passport Expiry Date</th><td>{{ betacrew.passportexpiredate|date('d/M/Y') }}</td><th>Passport Issue Place</th><td>{{ betacrew.passportissueplace }}</td><th>POE</th><td>{{ betacrew.poe }}</td></tr>
+						<tr><th>Seaman No.</th><td>{{ betacrew.seamanno }}</td><th>Seaman Expiry Date</th><td>{{ betacrew.seamanexpiredate|date('d/M/Y') }}</td><th>Mother</th><td>{{ betacrew.mother }}</td><th>Father</th><td>{{ betacrew.father }}</td></tr>
+						<tr><th>Contact No.</th><td>{{ betacrew.contactno }}</td><th>Home No.</th><td>{{ betacrew.homeno }}</td><th>Email</th><td>{{ betacrew.email }}</td><th>Blood Type</th><td>{{ betacrew.bloodtype }}</td></tr>
+						<tr><th>NOK Name</th><td>{{ betacrew.nokname }}</td><th>Relationship</th><td>{{ betacrew.relationship }}</td><th>Education</th><td>{{ betacrew.education }}</td><th>Languages</th><td>{{ betacrew.languages }}</td></tr>
+						
+						<tr><th>Address</th><td colspan="7">{{ betacrew.address }}</td></tr>
+					</tbody>
+				</table>
+				
+			{% endif %}	
+			
+			
+			<br />
+			<br />
+	    	<h3 class="light">Uploaded Files</h3>
+			<br />
+			<div class="row">
+				
+				<div class="small-12 columns">
+					<div class="uploadarea">
+
+						
+					</div>
+				</div>				
+			</div>	
+		    
+		</div>
+	</div>
+    
+	
+       
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	
+	<script type="text/javascript">
+		
+		$(document).ready(function() {
+			
+			$('.addlisthref').click(function(e){
+				e.preventDefault();
+								
+				$obj = $(this);
+				
+				if($(this).find('i').attr('class') == 'fa fa-plus-circle'){	
+					
+					$.post('{{path('ajax_handler')}}',
+						{type: 'addcrewlist', data: $(this).attr('id') }, 
+				            function(response){
+				                    if(response.code == 200 && response.success){//dummy check
+				                      //do something
+										$obj.find('i').attr({'class':'fa fa-minus-circle'
+										});
+				                    }			
+				    }, "json");
+				}
+				
+				else{
+					
+					$.post('{{path('ajax_handler')}}',               
+	                {type: 'deletecrewlist', data: $(this).attr('id') }, 
+				            function(response){
+				                    if(response.code == 200 && response.success){//dummy check
+				                      //do something
+										$obj.find('i').attr('class','fa fa-plus-circle');
+				                    }			
+				    }, "json");
+				}	
+				
+			});
+		});
+	</script>
+{% endblock %}

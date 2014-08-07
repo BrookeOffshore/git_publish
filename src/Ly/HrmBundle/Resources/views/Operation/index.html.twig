@@ -1,0 +1,244 @@
+{% extends 'LyHrmBundle::baseframe.html.twig' %}
+
+
+
+{% block title %}Main Page{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+	<br />
+	<div class="row">
+		<div class="small-12 columns">
+			<h1>Search & Notifications <span class="subtitle gray"></span></h1>
+			<hr />
+			{{ form_start(form, {'attr': {'id': 'form_search'}}) }}
+			<div class="infonode small-12 columns ">
+		    	<div class="row" data-equalizer>
+					<div class="small-6 columns searchleft" data-equalizer-watch>
+						<div class="row wall">
+							<div class="small-12 columns">
+								<div class="row">
+									<div class="small-6 columns ">		        	
+						        		<div class="row">
+									        <div class="small-3 columns">
+									          	<label class="left inline">{{ form_label(form.keyword) }}</label>
+									        </div>
+									        <div class="small-8 left columns">
+									          	{{ form_widget(form.keyword) }}
+									        </div>
+									    </div>
+								    </div>
+								    <div class="small-6 columns ">		        	
+						        		<div class="row">
+									        <div class="small-3 columns">
+									          	<label class="left inline">{{ form_label(form.vessel) }}</label>
+									        </div>
+									        <div class="small-8 left columns">
+									          	{{ form_widget(form.vessel) }}
+									        </div>
+									    </div>
+								    </div>
+							    </div>
+							    <div class="row">
+									<div class="small-6 columns ">		        	
+						        		
+									    <div class="row">
+									        <div class="small-3 columns">
+									          	<label class="left inline">{{ form_label(form.status) }}</label>
+									        </div>
+									        <div class="small-8 left columns">
+									          	{{ form_widget(form.status) }}
+									        </div>
+									    </div>
+								    </div>
+								    <div class="small-6 columns ">		        	
+						        		
+									    <div class="row">
+									        <div class="small-3 columns">
+									          	<label class="left inline">{{ form_label(form.craft) }}</label>
+									        </div>
+									        <div class="small-8 left columns">
+									          	{{ form_widget(form.craft) }}
+									        </div>
+									    </div>
+								    </div>
+							    </div>
+							    <div class="row">
+									<div class="small-6 columns ">
+										<div class="row">
+									        <div class="small-3 columns">
+									          	<label class="left inline">{{ form_label(form.nationality) }}</label>
+									        </div>
+									        <div class="small-8 left columns">
+									          	{{ form_widget(form.nationality) }}
+									        </div>
+									    </div>		        	
+						        		
+								    </div>
+								    <div class="small-6 columns ">
+								    	<div class="row">
+								    		<div class="small-11 columns">									      
+									          	<ul class="button-group radius right">
+													<li><a href="{{ path('addcrew_page') }}" class="small button" id="addcert">Add Crew</a></li>				    
+												    <li>{{ form_widget(form.submit) }}</li>
+												</ul>
+									        </div>
+									        	
+									    </div>						        		
+								    </div>
+							    </div>
+							</div>							
+						</div>		        		
+				    </div>
+				    <div class="infonode small-6 columns searchright" data-equalizer-watch>		        	
+		        		<div class="row sticker">
+		        			<div class='small-12 columns stickercontent'>
+		        				{{ body.body|raw }}
+		        			</div>
+		        				
+		        							        
+					    </div>
+				    </div>
+			    </div>
+			</div>
+			{{ form_end(form) }}
+			
+		</div>
+		<br />
+		
+		<div class="small-12 columns">
+			<br />
+			<h1>Crafts <span class="subtitle gray">Crew Description & Requirement</span></h1>
+			<hr />
+
+			<div class="row craftblock" data-equalizer>
+				<div class="small-2 columns" data-equalizer-watch>
+					<h3 class="light">Construction</h3>
+					
+				</div>
+				<div class="small-10 columns" data-equalizer-watch>
+					<ul class="small-block-grid-6 craftrow">
+						<li><a>Superintendent</a></li>
+						<li><a>Barge Foreman</a></li>
+						<li><a>Deck Foreman</a></li>
+						<li><a>Leaderman</a></li>
+						<li><a>Control Tower Operator</a></li>
+						<li><a>Anchor Foreman</a></li>
+					</ul>
+					<ul class="small-block-grid-6 craftrow">
+						<li><a>Control Tower Operator</a></li>
+						<li><a>Field Engineer</a></li>
+						<li><a>Hoist Operator</a></li>
+						<li><a>Rigger Foreman</a></li>
+						<li><a>Rigger Leaderman</a></li>
+						<li><a>Rigger</a></li>
+					</ul>
+					<ul class="small-block-grid-6 craftrow">
+						<li><a>Scaffolding Foreman</a></li>
+						<li><a>Scaffolding Leaderman</a></li>
+						<li><a>Scaffolder</a></li>
+						<li><a>Crane Operator</a></li>
+						<li><a>PFM Operators</a></li>
+						<li><a>Deck Crane Operators</a></li>
+					</ul>
+
+					<ul class="small-block-grid-6 craftrow">
+						<li><a>Welding Superintendent</a></li>
+						<li><a>Welder Main Line</a></li>
+						<li><a>Fitter/Spacers</a></li>
+						<li><a>Welder/Fitter</a></li>
+						<li><a>Auto Weld Tech. Foreman</a></li>
+						<li><a>QA/QC</a></li>
+					</ul>
+					
+				</div>
+			</div>
+<hr />
+			<div class="row craftblock" data-equalizer>
+				<div class="small-2 columns" data-equalizer-watch>
+					<h3 class="light">Marine</h3>
+					
+				</div>
+				<div class="small-10 columns" data-equalizer-watch>
+					
+					<ul class="small-block-grid-6 craftrow">
+						<li><a>Master/DPO</a></li>
+						<li><a>Captain/DPO</a></li>
+						<li><a>Chief Officer/DPO</a></li>
+						<li><a>Officer/DPO</a></li>
+						<li><a>Rov Supervisor</a></li>
+						<li><a>Vessel Administrator</a></li>
+					</ul>
+					<ul class="small-block-grid-6 craftrow">
+						<li><a>Bosun</a></li>
+						<li><a>Chief Engineer</a></li>
+						<li><a>Engineer</a></li>
+						<li><a>Chief Electrical Engineer</a></li>
+						<li><a>Electrical Engineer</a></li>
+						<li><a>Umbilical Installation Engineer</a></li>
+					</ul>
+					<ul class="small-block-grid-6 craftrow">
+						<li><a>Deck Engineer</a></li>
+						<li><a>Mechanic</a></li>
+						<li><a>Motorman</a></li>
+						<li><a>Machinist</a></li>
+						<li><a>Electrician</a></li>
+						<li><a>Tension Machine Technician</a></li>
+					</ul>
+
+					<ul class="small-block-grid-6 craftrow">
+						<li><a>Automation Engineer</a></li>
+						<li><a>Steward</a></li>
+						<li><a>Electronic Technician</a></li>
+						<li><a>Baker</a></li>
+						<li><a>Able Bodied Seaman</a></li>
+						<li><a>Vessel Clerks</a></li>
+					</ul>
+					
+					<ul class="small-block-grid-6 craftrow">
+						<li><a>Bassnet Data Clerk</a></li>
+						<li><a>I.T. Technician</a></li>
+						<li><a>Safety Officer</a></li>
+						<li><a>Oiler</a></li>
+						<li><a>Doctor</a></li>
+						<li><a>Medic</a></li>
+					</ul>
+					<ul class="small-block-grid-6 craftrow">
+						<li><a>Cook</a></li>
+						<li><a>Laundryman</a></li>
+						<li><a>Messman</a></li>
+					</ul>
+				</div>
+			</div>		
+					
+					
+				
+		<hr />
+		</div>
+		
+				
+		
+
+			
+	</div>		
+	
+	<div class="row">
+		<div class="small-12 columns">
+			<em>@Copyright Brookeoffshore 2014</em>
+		</div>
+		
+	</div>
+
+       
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+{% endblock %}
+
+
+
+

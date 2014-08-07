@@ -1,0 +1,156 @@
+{% extends 'LyHrmBundle::baseframe.html.twig' %}
+
+
+
+{% block title %}Brief Crew Information{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+	
+	<div class="row">
+		<div class="small-12 columns">
+			<h1>{{ crew.name }} ({{ crew.contractno }}) <span class="subtitle gray">{{ crew.craft }}, {{ crew.status }}</span></h1>
+			
+			<div class="cv">
+				<table class="borderedtable">
+	              <tbody><tr><th rowspan="5" style="width:150px;"><img class="imageinfo th" src="{{ asset('bundles/hrm/images/crew photo/'~ crew.photopath) }}"></th><th style="width:120px;">Name</th><td colspan="2">{{ crew.name }}</td><th style="width:120px;">Nationality</th><td>{{ crew.nationality }}</td><th style="width:120px;">Craft</th><td>{{ crew.craft }}</td></tr>
+	              <tr><th>Status</th><td colspan="2">{{ crew.status }}</td><th>Passport No.</th><td>{{ crew.passportno }}</td><th>ID No.</th><td>{{ crew.idno }}</td></tr>
+	              <tr><th>Gender</th><td colspan="2">Male</td><th>Date of Birth</th><td>{{ crew.birthday|date('d/M/Y') }}</td><th>Place of Birth</th><td>{{ crew.placeofbirth }}</td></tr>
+	              <tr><th>Passport Issue Date</th><td colspan="2">{{ crew.passportissuedate|date('d/M/Y') }}</td><th>Passport Expire Date</th><td>{{ crew.passportexpiredate|date('d/M/Y') }}</td><th>Passport Issue Place</th><td>{{ crew.passportissueplace }}</td></tr>
+	              <tr><th>Seamanbook No.</th><td colspan="2">{{ crew.seamanno }}</td><th>Seamanbook Expire Date</th><td>{% if crew.seamanexpiredate|date() == 'November 30, -0001 00:00' %} N/A {% else %} {{ crew.seamanexpiredate|date('d/M/Y') }} {% endif %}</td><th>Port of Embarkation</th><td>{{ crew.poe }}</td></tr>
+	              <tr><th>Certificates & Documents</th><td colspan="7">
+	              	
+	              	<ol class="certificateul">
+	              		{% for certificate in crew.certificate %}
+	              			<li><a href="{{ asset('bundles/hrm/certificate/'~ certificate.pathsave) }}" onclick="window.open(this.href); return false;">{{ certificate.name }}</a>.  <span data-tooltip class="has-tip tip-right radius" title="{{ certificate.note }}">{{ certificate.startdate|date('d/M/Y') }} - {% if certificate.enddate == NULL %} Unspecified {% else %} {{ certificate.enddate|date('d/M/Y') }}{% endif %}</span>.</li>
+	              		{% endfor %}
+	              	</ol>
+	              	
+	              </td></tr>
+	              
+	              <tr><th>Father Name</th><td>{{ crew.father }}</td><th  colspan="2">Mother Name</th><td>{{ crew.mother }}</td><th>Contact No.</th><td  colspan="2">{{ crew.contactno }}</td></tr>
+	              <tr><th>Blood Type</th><td>{{ crew.bloodtype }}</td><th colspan="2">Email</th><td>{{ crew.email }}</td><th>Home No.</th><td colspan="2">{{ crew.homeno }}</td></tr>
+	              <tr><th>NOK Name</th><td>{{ crew.nokname }}</td><th colspan="2">Relationship</th><td>{{ crew.relationship }}</td><th>Education &amp; Language</th><td colspan="2">{{ crew.education }} <br  /> {{ crew.languages }}</td></tr>              
+	              <tr><th>Address</th><td colspan="8">{{ crew.address }}</td></tr>
+	              <tr><th>Mdeical Check List</th><td colspan="8">
+	              	
+	              	<ol>
+	              		{% if crew.ogukcheck %} <li>Oil & Gas UK (OGUK) medical check-up</li>{% endif %}
+	              		{% if crew.stcwcheck %} <li>STCW ILO medical check up</li>{% endif %}
+	              		{% if crew.petrcheck %} <li>Petronas medical check-up (PMU)</li>{% endif %}
+	              		{% if crew.ogukpmucheck %} <li>OGUK + PMU medical check-up</li>{% endif %}
+	              		{% if crew.norwegian %} <li>Norwegian Maritime Directorate</li>{% endif %}
+	              		{% if crew.hepatitisa or crew.hepatitisb or crew.twinrix or crew.dtp or crew.po or crew.typhoid or crew.yf %}
+		              		<li>Vaccinations:
+		              			<ul>
+		              				{% if crew.hepatitisa %}<li>Hepatitis A</li>{% endif %}
+		              				{% if crew.hepatitisb %}<li>Hepatitis B</li>{% endif %}
+		              				{% if crew.twinrix %}<li>Twinrix</li>{% endif %}
+		              				{% if crew.dtp %}<li>DTP (Diphtheria, Pertussis, and Tetanus)</li>{% endif %}
+		              				{% if crew.po %}<li>Polio - Oral</li>{% endif %}
+		              				{% if crew.typhoid %}<li>Typhoid</li>{% endif %}
+		              				{% if crew.yf %}<li>Yellow Fever</li>{% endif %}	
+		              			</ul>
+		              		</li>
+		              	{% endif %}	
+	              		
+	              	</ol>
+	              	
+	              </td></tr>		
+	            </tbody></table>
+			</div>
+			<a class="right " href="{{ path('info_edit', { 'id' : crew.id }) }}">Edit Infomation</a><br />
+			<h1 class="light">Working Experience</h1>
+			
+			{% if crew.experience is empty %}
+				<h3 class="light">None.</h3>
+			{% else %}	
+			{% for experience in crew.experience %}
+				<blockquote>
+					<ul class="no-bullet experienceshow">
+						<li><span class="experiencelabel">Company:</span><span class="experiencecontent">{{ experience.company }}</span></li>
+						<li><span class="experiencelabel">Location:</span><span class="experiencecontent">{{ experience.location }}</span></li>
+						<li><span class="experiencelabel">Project:</span><span class="experiencecontent">{{ experience.project }}</span></li>
+						<li><span class="experiencelabel">Position Held:</span><span class="experiencecontent">{{ experience.position }}</span></li>
+						<li><span class="experiencelabel">Duration:</span><span class="experiencecontent">{{ experience.startdate|date('d/M/Y') }} - {% if experience.enddate == NULL %} Unspecified {% else %} {{ experience.enddate|date('d/M/Y') }} {% endif %}</span></li>
+						<li><span class="experiencelabel">Description:</span><span class="experiencecontent">{{ experience.description }}</span></li>
+					</ul>
+					
+				</blockquote>			
+			{% endfor %}
+			{% endif %}
+			<a class="right" href="{{ path('experience_page', { 'id' : crew.id }) }}">Edit Experience</a><br />
+			
+			<h1 class="light">Mobilization Records</h1>
+			
+			{% if crew.mob is empty %}
+				<h3 class="light">None.</h3>
+			{% else %}
+	
+				<table  class="stripe">
+			        <thead>
+			            <tr>
+			            	<th>Company</th>
+			            	<th>Vessel</th>
+			            	<th>Project</th>
+			            	<th>Start Date</th>
+			            	<th>End Date</th>
+			            	<th>Rate</th>
+			            	<th>Group</th>
+			            	<th>Remarks</th>		                
+			            </tr>
+			        </thead>
+			        <tbody>
+			        {% for mob in crew.mob %}
+			            <tr>		            	
+			                <td>{{ mob.frommobgroup.company }}</td>
+			                <td>{{ mob.frommobgroup.vessel }}</td>
+			                <td>{{ mob.frommobgroup.project }}</td>
+			                <td>{{ mob.startdate|date('d/m/Y  H:i') }}</td>
+			                <td>{% if mob.enddate == null %} N/a {% else %}{{ mob.enddate|date('d/m/Y  H:i') }} {% endif %}</td>
+			                <td>{% if mob.rate == null %} N/a {% else %}{{ mob.rate }} {% endif %}</td>
+			                <td><a href="{{ path('mobrecord_detail', {'mobgroupid' : mob.frommobgroup.id}) }}">{{ mob.frommobgroup.record }}</a></td>
+			                <td>{% if mob.remark == null %} N/a {% else %}{{ mob.remark }} {% endif %}</td>             
+			            </tr>
+			        {% endfor %}
+			        </tbody>
+		    	</table>
+				
+			{% endif %}
+			<div class="small-12 columns">
+				<ul class="button-group radius right">
+					<li><a href="#" class="small button success" id="drop">Export File</a></li>
+					<li><a onclick="return confirm_click();" href="{{ path('info_drop', {'id' : crew.id}) }}" class="small button alert" id="drop">Drop this crew</a></li>				    
+				</ul>	 
+	  		</div>
+		</div>
+	</div>
+    
+	
+       
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	
+	
+	<script type="text/javascript">
+		function confirm_click()
+		{
+			return confirm("Do you want to proceed this action? Documents will be erased from the database!");
+		}
+	</script>
+{% endblock %}
+
+
+
+
+
+
+
+
+

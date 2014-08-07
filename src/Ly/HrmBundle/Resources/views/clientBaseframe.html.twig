@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% block head %}            
+            <title>{% block title %}{% endblock %} - HRM</title>
+        {% endblock %}
+        
+        {% block stylesheets %}
+        	<link rel="shortcut icon" href="{{ asset('logomini.ico') }}">
+            <link href="{{ asset('bundles/hrm/css/doc.css') }}" rel="stylesheet" />
+            <link href="{{ asset('bundles/hrm/css/responsive-tables.css') }}" rel="stylesheet" />
+            <link href="{{ asset('bundles/hrm/css/normalize.css') }}" rel="stylesheet" />
+            <link href="{{ asset('bundles/hrm/css/main.css') }}" rel="stylesheet" />
+            <link href="{{ asset('bundles/hrm/css/font-awesome.css') }}" rel="stylesheet" />
+            <link href="{{ asset('bundles/hrm/css/jquery.datetimepicker.css') }}" rel="stylesheet" />
+            <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400' rel='stylesheet' type='text/css'>
+        {% endblock %}
+    </head>
+    
+	<body>
+		<div class="page">			
+				<div class="fixed">					
+					<nav class="top-bar" data-topbar>						
+								<ul class="title-area">
+									<li class="name">
+										<h1><a href="{{ path('client_dash_board') }}"><img src="{{ asset('bundles/hrm/images/brooke_offshore_logo.png') }}" /></a></h1>
+									</li>
+									<li class="toggle-topbar menu-icon"><a href="#">Menu</a></li>
+								</ul>
+								
+								<section class="top-bar-section">
+
+							    	<ul class="right">
+							    		<li class="divider"></li>
+
+							    		<li><a href="{{ path('client_dash_board') }}">Dash Board</a></li>
+							    		<li class="divider"></li>
+
+							    		<li><a href="{{ path('client_crew_page') }}">Crews</a></li>
+							    		<li class="divider"></li>
+
+									   <li><a href="">Request History</a></li>  				
+										<li class="divider"></li>
+										
+										  							     	
+										
+								    	<li class="has-dropdown">
+								        	<a href="#">{% block topsearchusername %}
+								          			{{ render(controller('LyHrmBundle:Client:topbarusername')) }}
+								          		{% endblock %}</a>
+								        		<ul class="dropdown">
+								        			<li><a class="alert button" href="{{ path('fos_user_security_logout') }}">Log Out</a></li>
+								        		</ul>
+								      	</li>
+								    </ul>
+
+  								</section>
+					
+						
+					</nav>
+				</div>
+						
+				<section id="main-content">
+			        {% block body %}
+			        
+			        {% endblock %}
+		        </section>
+		</div>
+
+    </body>
+    {% block javascripts %}
+    	<script src="{{ asset('bundles/hrm/js/vendor/jquery.js') }}"></script>
+    	<script src="{{ asset('bundles/hrm/js/foundation/foundation.js') }}"></script>
+    	<script src="{{ asset('bundles/hrm/js/foundation/foundation.topbar.js') }}"></script>    	
+    	<script src="{{ asset('bundles/hrm/js/foundation/foundation.dropdown.js') }}"></script>
+    	<script src="{{ asset('bundles/hrm/js/foundation/foundation.alert.js') }}"></script>
+
+    	<script src="{{ asset('bundles/hrm/js/foundation/responsive-tables.js') }}"></script>
+    	<script type="text/javascript">    		
+    		$(document).foundation({
+			  dropdown: {
+			    // specify the class used for active dropdowns
+			    active_class: 'open'
+			  }
+			});
+			
+    	</script>
+    {% endblock %}
+</html>

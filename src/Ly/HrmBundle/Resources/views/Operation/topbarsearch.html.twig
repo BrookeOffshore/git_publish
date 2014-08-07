@@ -1,0 +1,11 @@
+
+<form action="{{ path('brief_info') }}" method="post" {{ form_enctype(form) }}>
+	<div class="row collapse">
+		<div class="small-8 columns">
+			{{ form_widget(form.keyword) }}
+		</div>
+		<div class="small-4 columns">
+			{{ form_widget(form.submit) }}
+		</div>
+	</div>	
+</form>

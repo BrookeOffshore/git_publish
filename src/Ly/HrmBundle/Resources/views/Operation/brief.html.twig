@@ -1,0 +1,162 @@
+{% extends 'LyHrmBundle::baseframe.html.twig' %}
+
+
+
+{% block title %}Brief Crew Information{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+	
+	<div class="row">
+		<div class="small-12 columns">	
+			<h1>Brief Information <span class="subtitle gray">Default sorted by contract number</span></h1>
+			<hr  />
+			{% if pages == 0 %}
+			<h3 class="light">None.</h3>
+			{% else %}
+			<table class="stripe responsive">
+		        <thead>
+		            <tr><th>&nbsp;</th>
+		                <th>{% if sort == 'contractno' %} Contract {% else %}<a href="{{ path('brief_info', {'sort' : 'contractno' }) }}">Contract</a>{% endif %}</th>
+		                <th>{% if sort == 'name' %} Name {% else %}<a href="{{ path('brief_info', {'sort' : 'name'}) }}">Name</a>{% endif %}</th>
+		                <th>{% if sort == 'nationality' %} Nationality {% else %}<a href="{{ path('brief_info', {'sort' : 'nationality'}) }}">Nationality</a>{% endif %}</th>
+		                <th>{% if sort == 'craft' %} Craft {% else %}<a href="{{ path('brief_info', {'sort' : 'craft'}) }}">Craft</a>{% endif %}</th>
+		                <th id="statusth">{% if sort == 'status' %} Status {% else %}<a href="{{ path('brief_info', {'sort' : 'status'}) }}">Status</a>{% endif %}</th>
+		                <th>{% if sort == 'vessel' %} Vessel {% else %}<a href="{{ path('brief_info', {'sort' : 'vessel'}) }}">Vessel</a>{% endif %}</th>
+		                <th>{% if sort == 'company' %} Company {% else %}<a href="{{ path('brief_info', {'sort' : 'company'}) }}">Company</a>{% endif %}</th>
+		            </tr>
+		        </thead>
+		        <tbody>
+		        {% for crew in crew %}
+		            <tr>
+		            	<td><a href='#' class="addlisthref" id="{{ crew.id }}">
+		            		{% if {'id': crew.id, 'name' : crew.name } in app.session.get('crew') %}
+		            			<i class="fa fa-minus-circle">&nbsp;</i>
+		            		{% else %}
+		            			<i class="fa fa-plus-circle">&nbsp;</i>
+		            		{% endif %}
+		            		</a>
+		            	</td>	
+		               <td>{{ crew.contractno }}</td>
+		               <td><a href="{{ path('info_show', {'id' : crew.id }) }}">{{ crew.name }}</a></td>
+		               <td>{{ crew.nationality }}</td>
+		               <td>{{ crew.craft }}</td>
+		               <td><select class="statusoption" id="{{ crew.id }}">
+		                		<option value="POB"  {% if crew.status == 'POB' %} selected {% endif %}>POB</option>
+		                		<option value="Available"  {% if crew.status == 'Available' %} selected {% endif %}>Available</option>
+		                		<option value="Rotation"  {% if crew.status == 'Rotation' %} selected {% endif %}>Rotation</option>
+		                		<option value="Resigned"  {% if crew.status == 'Resigned' %} selected {% endif %}>Resigned</option>
+		                		<option value="NFR"  {% if crew.status == 'NFR' %} selected {% endif %}>NFR</option>
+		                	</select>
+		               </td>
+		               <td>
+		               	<select class="vesseloption" id="{{ crew.id }}">
+		               		{% for key,company in vessel_option %}
+		               			<optgroup label="{{ key }}">
+		               				{% for vessel in company %}
+		               					<option value="{{ vessel }}" {% if crew.vessel == vessel %} selected {% endif %} >{{ vessel }}</option>
+		               				{% endfor %}
+		               			</optgroup>
+		               		{% endfor %}
+		                	</select>
+		            	</td>
+		               <td>{{ crew.company }}</td>             
+		            </tr>
+		        {% endfor %}
+		        </tbody>
+	    	</table>
+	    	
+		   <ul class="pagination">
+		    	{% if page == 1 %}
+					<li class="arrow unavailable"><a href="#">&laquo;</a></li>
+				{% else %}
+		    		<li class="arrow"><a href="{{ path('brief_info', {'sort' : sort, 'page' : page-1 }) }}">&laquo;</a></li>
+		    	{% endif %}	
+			    {% for i in 1..pages %}
+					{% if i == page %}
+						<li class="current"><a href="#">{{ i }}</a></li>
+					{% else %}
+						<li><a href="{{ path('brief_info', {'sort' : sort, 'page' : i }) }}">{{ i }}</a></li>
+					{% endif%}	
+				{% endfor %}
+				{% if page == pages %}
+					<li class="arrow unavailable"><a href="#">&raquo;</a></li>
+				{% else %}
+		    		<li class="arrow"><a href="{{ path('brief_info', {'sort' : sort, 'page' : page+1 }) }}">&raquo;</a></li>
+		    	{% endif%}
+			</ul>
+			{% endif %}
+		</div>
+	</div>
+    
+	
+       
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	
+	<script type="text/javascript">
+		
+		$(document).ready(function() {
+			
+			$('.addlisthref').click(function(e){
+				e.preventDefault();
+								
+				$obj = $(this);
+				
+				if($(this).find('i').attr('class') == 'fa fa-plus-circle'){	
+					$obj.find('i').attr({'class':'fa fa-minus-circle'
+										});
+					$.post('{{path('ajax_handler')}}',
+						{type: 'addcrewlist', data: $(this).attr('id') }, 
+				            function(response){
+				                    if(response.code == 200 && response.success){//dummy check
+				                      //do something										
+				                    }			
+				    }, "json");
+				}
+				
+				else{
+					$obj.find('i').attr('class','fa fa-plus-circle');
+					$.post('{{path('ajax_handler')}}',               
+	                {type: 'deletecrewlist', data: $(this).attr('id') }, 
+				            function(response){
+				                    if(response.code == 200 && response.success){//dummy check
+				                      //do something										
+				                    }			
+				    }, "json");
+				}	
+				
+			});
+			
+			$('.statusoption').change(function() {
+				
+				$.post('{{path('ajax_handler')}}',
+				{type: 'status', id: $(this).attr('id'), data: $(this).val() }, 
+			            function(response){
+			                    if(response.code == 200 && response.success){//dummy check
+			                      //do something
+									alert("Status Updated!");
+			                    }			
+			    }, "json");
+			});
+
+			$('.vesseloption').change(function() {
+				
+				$.post('{{path('ajax_handler')}}',
+				{type: 'vessel', id: $(this).attr('id'), vessel: $(this).val(), company: $(this.options[this.selectedIndex]).closest('optgroup').prop('label') }, 
+			            function(response){
+			                    if(response.code == 200 && response.success){//dummy check
+			                      //do something
+									alert("Vessel Updated!");
+			                    }			
+			    }, "json");
+			});
+		});
+	</script>
+{% endblock %}

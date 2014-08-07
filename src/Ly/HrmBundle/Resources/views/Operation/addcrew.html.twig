@@ -1,0 +1,655 @@
+{% extends 'LyHrmBundle::baseframe.html.twig' %}
+
+
+
+{% block title %}Add Crew{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+
+
+	<div class="row">
+		<div class="small-12 columns">
+			<h1>Add Crew <span class="subtitle gray"></span></h1>
+			<hr />
+			{{ form_start(form, {'attr': {'id': 'form_infoedit'}}) }}
+			
+			<fieldset class="infoedit">				
+				<div class="infonode small-12 columns ">
+			    	<div class="row">
+						<div class="infonode small-6 columns ">		        	
+			        		<div class="row">
+						        <div class="small-3 columns">
+						          	<label class="left inline">{{ form_label(form.contractno) }}</label>
+						        </div>
+						        <div class="small-7 left columns">
+						          	{{ form_widget(form.contractno) }}
+						        </div>
+						    </div>
+					    </div>
+					    <div class="infonode small-6 columns ">		        	
+			        		<div class="row">
+						        <div class="small-3 columns">
+						          	<label class="left inline">{{ form_label(form.name) }}</label>
+						        </div>
+						        <div class="small-7 left columns">
+						          	{{ form_widget(form.name) }}
+						        </div>
+						    </div>
+					    </div>
+				    </div>
+				</div>
+				<div class="infonode small-12 columns ">
+			    	<div class="row">	   
+					    <div class="infonode small-6 columns ">		        	
+			        		<div class="row">
+						        <div class="small-3 columns">
+						          	<label class="left inline">{{ form_label(form.nationality) }}</label>
+						        </div>
+						        <div class="small-7 left columns">
+						          	{{ form_widget(form.nationality) }}
+						        </div>
+						    </div>
+					    </div>
+					    <div class="infonode small-6 columns ">		        	
+			        		<div class="row">
+						        <div class="small-3 columns">
+						          	<label class="left inline">{{ form_label(form.craft) }}</label>
+						        </div>
+						        <div class="small-7 left columns">
+						          	{{ form_widget(form.craft) }}
+						        </div>
+						    </div>
+					    </div>
+				    </div>
+			    </div>
+			    <div class="infonode small-12 columns ">
+			    	<div class="row">
+					    <div class="infonode small-6 columns ">		        	
+			        		<div class="row">
+						        <div class="small-3 columns">
+						          	<label class="left inline">{{ form_label(form.status) }}</label>
+						        </div>
+						        <div class="small-7 left columns">
+						          	{{ form_widget(form.status) }}
+						        </div>
+						    </div>
+					    </div>
+					    <div class="infonode small-6 columns ">		        	
+			        		<div class="row">
+						        <div class="small-3 columns">
+						          	<label class="left inline">{{ form_label(form.vessel) }}</label>
+						        </div>
+						        <div class="small-7 left columns">
+						          	{{ form_widget(form.vessel) }}
+						        </div>
+						    </div>
+					    </div>
+					</div>
+				</div>   
+			    <div class="infonode small-12 columns ">
+			    	<div class="row">		        	
+		        		<div class="small-6 columns">
+		        			<div class="row">
+						        <div class="small-3 columns">
+						          	<label class="left inline">{{ form_label(form.company) }}</label>
+						        </div>
+						        <div class="small-7 left columns">
+						          	{{ form_widget(form.company) }}
+						        </div>
+					       	</div> 
+					    </div>
+					</div>
+			    </div>
+			    
+			   	<hr />
+			   	<div class="infonode small-12 columns ">
+			    	<div class="row">
+					    <div class="infonode small-6 columns ">		        	
+			        		<div class="row">
+						        <div class="small-3 columns">
+						          	<label class="left inline">{{ form_label(form.passportno) }}</label>
+						        </div>
+						        <div class="small-7 left columns">
+						          	{{ form_widget(form.passportno) }}
+						        </div>
+						    </div>
+					    </div>
+					    <div class="infonode small-6 columns ">		        	
+			        		<div class="row">
+						        <div class="small-3 columns">
+						          	<label class="left inline">{{ form_label(form.idno) }}</label>
+						        </div>
+						        <div class="small-7 left columns">
+						          	{{ form_widget(form.idno) }}
+						        </div>
+						    </div>
+					    </div>
+				   </div>
+			   </div>
+			   <div class="infonode small-12 columns ">
+			    	<div class="row">
+					    <div class="infonode small-6 columns ">		        	
+			        		<div class="row">
+						        <div class="small-3 columns">
+						          	<label class="left inline">{{ form_label(form.gender) }}</label>
+						        </div>
+						        <div class="small-7 left columns">
+						          	{{ form_widget(form.gender) }}
+						        </div>
+						    </div>
+					    </div>
+					    <div class="infonode small-6 columns ">		        	
+			        		<div class="row">
+						        <div class="small-3 columns">
+						          	<label class="left inline">{{ form_label(form.birthday) }}</label>
+						        </div>
+						        <div class="small-7 left columns">
+						          	{{ form_widget(form.birthday) }}						          		
+								    {% if form.birthday.vars.errors|length > 0 %}
+								        {% for error in form.birthday.vars.errors %}								           
+								        	<div data-alert class="alert-box warning radius">
+												{{ error.message }}
+											  	<a href="#" class="close">&times;</a>
+										   </div>
+								        {% endfor %}									    
+								    {% endif %}
+										
+						        </div>
+						    </div>
+					    </div>
+				    </div>
+			    </div>
+			    <div class="infonode small-12 columns ">
+			    	<div class="row">
+					    <div class="infonode small-6 columns ">		        	
+			        		<div class="row">
+						        <div class="small-3 columns">
+						          	<label class="left inline">{{ form_label(form.placeofbirth) }}</label>
+						        </div>
+						        <div class="small-7 left columns">
+						          	{{ form_widget(form.placeofbirth) }}
+						        </div>
+						    </div>
+					    </div>
+				    </div>
+			   	</div>
+			   	<div class="infonode small-12 columns ">
+			    	<div class="row">
+					    <div class="infonode small-6 columns ">		        	
+			        		<div class="row">
+						        <div class="small-3 columns">
+						          	<label class="left inline">{{ form_label(form.passportissuedate) }}</label>
+						        </div>
+						        <div class="small-7 left columns">
+						          	{{ form_widget(form.passportissuedate) }}
+						          	{% if form.passportissuedate.vars.errors|length > 0 %}
+								        {% for error in form.passportissuedate.vars.errors %}								           
+								        	<div data-alert class="alert-box warning radius">
+												{{ error.message }}
+											  	<a href="#" class="close">&times;</a>
+										   </div>
+								        {% endfor %}									    
+								    {% endif %}
+						        </div>
+						    </div>
+					    </div>
+					    <div class="infonode small-6 columns ">		        	
+			        		<div class="row">
+						        <div class="small-3 columns">
+						          	<label class="left inline">{{ form_label(form.passportexpiredate) }}</label>
+						        </div>
+						        <div class="small-7 left columns">
+						          	{{ form_widget(form.passportexpiredate) }}
+						          	{% if form.passportexpiredate.vars.errors|length > 0 %}
+								        {% for error in form.passportexpiredate.vars.errors %}								           
+								        	<div data-alert class="alert-box warning radius">
+												{{ error.message }}
+											  	<a href="#" class="close">&times;</a>
+										   </div>
+								        {% endfor %}									    
+								    {% endif %}
+						        </div>
+						    </div>
+					    </div>
+		   			</div>
+			   	</div>
+			    <div class="infonode small-12 columns ">
+			    	<div class="row">
+					    <div class="infonode small-6 columns ">		        	
+			        		<div class="row">
+						        <div class="small-3 columns">
+						          	<label class="left inline">{{ form_label(form.passportissueplace) }}</label>
+						        </div>
+						        <div class="small-7 left columns">
+						          	{{ form_widget(form.passportissueplace) }}
+						        </div>
+						    </div>
+					    </div>
+				    
+					    <div class="infonode small-6 columns ">		        	
+			        		<div class="row">
+						        <div class="small-3 columns">
+						          	<label class="left inline">{{ form_label(form.poe) }}</label>
+						        </div>
+						        <div class="small-7 left columns">
+						          	{{ form_widget(form.poe) }}
+						        </div>
+						    </div>
+					    </div>
+				   </div>
+			   </div>
+			   
+			   <div class="infonode small-12 columns ">
+			    	<div class="row">
+					    <div class="infonode small-6 columns ">		        	
+			        		<div class="row">
+						        <div class="small-3 columns">
+						          	<label class="left inline">{{ form_label(form.seamanno) }}</label>
+						        </div>
+						        <div class="small-7 left columns">
+						          	{{ form_widget(form.seamanno) }}
+						        </div>
+						    </div>
+					    </div>
+					    <div class="infonode small-6 columns ">		        	
+			        		<div class="row">
+						        <div class="small-3 columns">
+						          	<label class="left inline">{{ form_label(form.seamanexpiredate) }}</label>
+						        </div>
+						        <div class="small-7 left columns">
+						          	{{ form_widget(form.seamanexpiredate) }}
+						          	{% if form.seamanexpiredate.vars.errors|length > 0 %}
+								        {% for error in form.seamanexpiredate.vars.errors %}								           
+								        	<div data-alert class="alert-box warning radius">
+												{{ error.message }}
+											  	<a href="#" class="close">&times;</a>
+										   </div>
+								        {% endfor %}									    
+								    {% endif %}
+						        </div>
+						    </div>
+					    </div>
+				    </div>
+			    </div>
+			    <hr />
+			    <div class="infonode small-12 columns ">
+			    	<div class="row">
+					    <div class="infonode small-6 columns ">		        	
+			        		<div class="row">
+						        <div class="small-3 columns">
+						          	<label class="left inline">{{ form_label(form.mother) }}</label>
+						        </div>
+						        <div class="small-7 left columns">
+						          	{{ form_widget(form.mother) }}
+						        </div>
+						    </div>
+					    </div>
+					    <div class="infonode small-6 columns ">		        	
+			        		<div class="row">
+						        <div class="small-3 columns">
+						          	<label class="left inline">{{ form_label(form.father) }}</label>
+						        </div>
+						        <div class="small-7 left columns">
+						          	{{ form_widget(form.father) }}
+						        </div>
+						    </div>
+					    </div>
+				    </div>
+			    </div>
+			    <div class="infonode small-12 columns ">
+			    	<div class="row">
+					    <div class="infonode small-6 columns ">		        	
+			        		<div class="row">
+						        <div class="small-3 columns">
+						          	<label class="left inline">{{ form_label(form.contactno) }}</label>
+						        </div>
+						        <div class="small-7 left columns">
+						          	{{ form_widget(form.contactno) }}
+						        </div>
+						    </div>
+					    </div>
+					    <div class="infonode small-6 columns ">		        	
+			        		<div class="row">
+						        <div class="small-3 columns">
+						          	<label class="left inline">{{ form_label(form.homeno) }}</label>
+						        </div>
+						        <div class="small-7 left columns">
+						          	{{ form_widget(form.homeno) }}
+						        </div>
+						    </div>
+					    </div>
+				    </div>
+			    </div>
+			    <div class="infonode small-12 columns ">
+			    	<div class="row">
+					    <div class="infonode small-6 columns ">		        	
+			        		<div class="row">
+						        <div class="small-3 columns">
+						          	<label class="left inline">{{ form_label(form.email) }}</label>
+						        </div>
+						        <div class="small-7 left columns">
+						          	{{ form_widget(form.email) }}
+						        </div>
+						    </div>
+					    </div>
+					    <div class="infonode small-6 columns ">		        	
+			        		<div class="row">
+						        <div class="small-3 columns">
+						          	<label class="left inline">{{ form_label(form.bloodtype) }}</label>
+						        </div>
+						        <div class="small-7 left columns">
+						          	{{ form_widget(form.bloodtype) }}
+						        </div>
+						    </div>
+					    </div>
+				    </div>
+			    </div>
+			    
+			    <div class="infonode small-12 columns ">
+			    	<div class="row">
+					    <div class="infonode small-6 columns ">		        	
+			        		<div class="row">
+						        <div class="small-3 columns">
+						          	<label class="left inline">{{ form_label(form.address) }}</label>
+						        </div>
+						        <div class="small-7 left columns">
+						          	{{ form_widget(form.address) }}
+						        </div>
+						    </div>
+					    </div>
+					    <div class="infonode small-6 columns ">		        	
+			        		<div class="row">
+						        <div class="small-3 columns">
+						          	<label class="left inline">{{ form_label(form.nokname) }}</label>
+						        </div>
+						        <div class="small-7 left columns">
+						          	{{ form_widget(form.nokname) }}
+						        </div>
+						    </div>
+					    </div>
+				    </div>
+				</div>
+				<div class="infonode small-12 columns ">
+			    	<div class="row">    
+					    <div class="infonode small-6 columns ">		        	
+			        		<div class="row">
+						        <div class="small-3 columns">
+						          	<label class="left inline">{{ form_label(form.relationship) }}</label>
+						        </div>
+						        <div class="small-7 left columns">
+						          	{{ form_widget(form.relationship) }}
+						        </div>
+						    </div>
+					    </div>
+					    <div class="infonode small-6 columns ">		        	
+			        		<div class="row">
+						        <div class="small-3 columns">
+						          	<label class="left inline">{{ form_label(form.education) }}</label>
+						        </div>
+						        <div class="small-7 left columns">
+						          	{{ form_widget(form.education) }}
+						        </div>
+						    </div>
+					    </div>
+				    </div>
+			    </div>
+			    <div class="infonode small-12 columns ">
+			    	<div class="row">
+					    <div class="infonode small-6 columns ">		        	
+			        		<div class="row">
+						        <div class="small-3 columns">
+						          	<label class="left inline">{{ form_label(form.languages) }}</label>
+						        </div>
+						        <div class="small-7 left columns">
+						          	{{ form_widget(form.languages) }}
+						        </div>
+						    </div>
+					    </div>
+					    <div class="infonode small-6 columns ">		        	
+			        		<div class="row">
+						        <div class="small-3 columns">
+						          	<label class="left inline">{{ form_label(form.photopath) }}</label>
+						        </div>
+						        <div class="small-7 left columns">
+						          	{{ form_widget(form.photopath) }}
+						        </div>
+						    </div>
+					    </div>
+					</div>
+				</div>
+				
+				<hr />
+				
+				<div class="infonode small-12 columns ">
+					<div class="row">
+						<table class="stripe">
+				    		<tr><td width="3%">{{ form_widget(form.ogukcheck) }}</td><td width="47%">{{ form_label(form.ogukcheck) }}</td><td width="3%">{{ form_widget(form.stcwcheck) }}</td><td width="47%">{{ form_label(form.stcwcheck) }}</td></tr>
+				    		<tr><td width="3%">{{ form_widget(form.petrcheck) }}</td><td width="47%">{{ form_label(form.petrcheck) }}</td><td width="3%">{{ form_widget(form.ogukpmucheck) }}</td><td width="47%">{{ form_label(form.ogukpmucheck) }}</td></tr>
+				    		<tr><td width="3%">{{ form_widget(form.norwegian) }}</td><td width="47%">{{ form_label(form.norwegian) }}</td><td width="3%">{{ form_widget(form.hepatitisa) }}</td><td width="47%">{{ form_label(form.hepatitisa) }}</td></tr>
+				    		<tr><td width="3%">{{ form_widget(form.hepatitisb) }}</td><td width="47%">{{ form_label(form.hepatitisb) }}</td><td width="3%">{{ form_widget(form.twinrix) }}</td><td width="47%">{{ form_label(form.twinrix) }}</td></tr>
+				    		<tr><td width="3%">{{ form_widget(form.yf) }}</td><td width="47%">{{ form_label(form.yf) }}</td><td width="3%">{{ form_widget(form.dtp) }}</td><td width="47%">{{ form_label(form.dtp) }}</td></tr>
+				    		<tr><td width="3%">{{ form_widget(form.po) }}</td><td width="47%">{{ form_label(form.po) }}</td><td width="3%">{{ form_widget(form.typhoid) }}</td><td width="47%">{{ form_label(form.typhoid) }}</td></tr>
+				    	</table>
+					</div>			    	
+				</div>
+				<hr />
+				
+				
+				
+				{% for certificate in form.certificate %}
+					<fieldset class='certificatefield'>
+						
+						<div class="small-12 columns">
+							<div class="row">
+								<div class="small-2 columns">
+						          	<label class="left inline">{{ form_label(certificate.name) }}</label>
+						        </div>
+						        <div class="small-9 left columns">
+						          	{{ form_widget(certificate.name) }}
+						        </div>
+							</div>
+							<div class="row">
+								<div class="small-6 columns">
+									<div class="row">
+										<div class="small-3 columns">
+								          	<label class="left inline">{{ form_label(certificate.startdate) }}</label>
+								        </div>
+								        <div class="small-7 left columns">
+								          	{{ form_widget(certificate.startdate) }}
+								        </div>
+									</div>
+								</div>
+								<div class="small-6 columns">
+									<div class="row">
+										<div class="small-3 columns">
+								          	<label class="left inline">{{ form_label(certificate.enddate) }}</label>
+								        </div>
+								        <div class="small-7 left columns">
+								          	{{ form_widget(certificate.enddate) }}
+								        </div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="small-6 columns">
+									<div class="row">
+										<div class="small-3 columns">
+								          	<label class="left inline">{{ form_label(certificate.note) }}</label>
+								        </div>
+								        <div class="small-7 left columns">
+								          	{{ form_widget(certificate.note) }}
+								        </div>
+									</div>
+								</div>
+								<div class="small-6 columns">
+									<div class="row">
+										<div class="small-3 columns">
+								          	<label class="left inline">{{ form_label(certificate.path) }}</label>
+								        </div>
+								        <div class="small-7 left columns">
+								          	{{ form_widget(certificate.path) }}
+								        </div>
+									</div>
+								</div>
+							</div>
+						</div>
+						{{ form_label(certificate.pathsave) }}{{ form_widget(certificate.pathsave) }}
+						<div class="left small-11 columns ">	
+			        		<a class="delete label alert right" href="#">Delete</a>
+			       		</div>
+					</fieldset>	
+				
+				{% endfor %}
+				
+							   
+			</fieldset>
+			<br />
+			<div class="small-12 columns">
+				<ul class="button-group radius right">
+					<li><a href="javascript:{}" class="small button" id="addcert">Add Certificate</a></li>				    
+				    <li>{{ form_widget(form.submit) }}</li>
+				</ul>	 
+	  		</div>
+	  		{{ form_end(form) }}	
+		</div>	
+	</div>
+
+
+
+
+
+
+       
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	
+	<script type="text/javascript">
+		
+		var $addTagLink = $('#addcert');
+		
+		$(document).ready(function() {
+	   		
+	   		var index = $('fieldset.infoedit').find('fieldset').length;
+			    $addTagLink.on('click', function(e) {
+			        // prevent the link from creating a "#" on the URL
+			        e.preventDefault();
+					
+			        // add a new tag form (see next code block)
+			        index = addTagForm($addTagLink,index);
+			    });
+	   		
+	   		    
+		    $(".delete").click(function(e) {
+		    	e.preventDefault();
+		    	
+			    $(this).closest('.certificatefield').slideUp('normal', function() { $(this).closest('.certificatefield').remove(); });
+	
+			});
+			
+			$('#ly_hrmbundle_crewinfo_vessel').on('change', function ()
+			{
+			    var label = $(this.options[this.selectedIndex]).closest('optgroup').prop('label');
+			    $('#ly_hrmbundle_crewinfo_company').val(label);
+			    
+			    if($(this).val()=='N/A')
+			    	$('#ly_hrmbundle_crewinfo_company').val('N/A');
+			});
+			
+		    
+		});
+		
+		function addTagForm($newLinkLi,index) {
+
+	    var $newform = '<fieldset class="certificatefield">\
+<div class="small-12 columns">\
+<div class="row">\
+<div class="small-6 columns">\
+<div class="row">\
+<div class="small-3 columns">\
+<label class="left inline"><label for="ly_hrmbundle_crewinfo_certificate_'+index+'_category" class="required">Category</label></label>\
+</div>\
+<div class="small-7 left columns">\
+<select id="ly_hrmbundle_crewinfo_certificate_'+index+'_category" name="ly_hrmbundle_crewinfo[certificate]['+index+'][category]"><option value="Bosiet">Bosiet</option><option value="Medical">Medical</option><option value="Passport">Passport</option><option value="Seaman Book">Seaman Book</option><option value="Bst">Bst</option><option value="Contract">Contract</option><option value="Other">Other</option></select>\
+</div>\
+</div>\
+</div>\
+<div class="small-6 columns">\
+<div class="row">\
+<div class="small-3 columns">\
+<label class="left inline"><label for="ly_hrmbundle_crewinfo_certificate_'+index+'_name" class="required">Certificate Name</label></label>\
+</div>\
+<div class="small-7 left columns">\
+<input type="text" id="ly_hrmbundle_crewinfo_certificate_'+index+'_name" name="ly_hrmbundle_crewinfo[certificate]['+index+'][name]" required="required" value="">\
+</div>\
+</div>\
+</div>\
+</div>\
+<div class="row">\
+<div class="small-6 columns">\
+<div class="row">\
+<div class="small-3 columns">\
+<label class="left inline"><label for="ly_hrmbundle_crewinfo_certificate_'+index+'_startdate">Issue Date</label></label>\
+</div>\
+<div class="small-7 left columns">\
+<input type="text" class="datepicker" placeholder="DD/MM/YYYY" id="ly_hrmbundle_crewinfo_certificate_'+index+'_startdate" name="ly_hrmbundle_crewinfo[certificate]['+index+'][startdate]" value="">\
+</div>\
+</div>\
+</div>\
+<div class="small-6 columns">\
+<div class="row">\
+<div class="small-3 columns">\
+<label class="left inline"><label for="ly_hrmbundle_crewinfo_certificate_'+index+'_enddate">Expiry Date</label></label>\
+</div>\
+<div class="small-7 left columns">\
+<input type="text" class="datepicker" placeholder="DD/MM/YYYY" id="ly_hrmbundle_crewinfo_certificate_'+index+'_enddate" name="ly_hrmbundle_crewinfo[certificate]['+index+'][enddate]" value="">\
+</div>\
+</div>\
+</div>\
+</div>\
+<div class="row">\
+<div class="small-6 columns">\
+<div class="row">\
+<div class="small-3 columns">\
+<label class="left inline"><label for="ly_hrmbundle_crewinfo_certificate_'+index+'_note" class="required">Notes</label></label>\
+</div>\
+<div class="small-7 left columns">\
+<input type="text" id="ly_hrmbundle_crewinfo_certificate_'+index+'_note" name="ly_hrmbundle_crewinfo[certificate]['+index+'][note]">\
+</div>\
+</div>\
+</div>\
+<div class="small-6 columns">\
+<div class="row">\
+<div class="small-3 columns">\
+<label class="left inline"><label for="ly_hrmbundle_crewinfo_certificate_'+index+'_path">Certificate Path</label></label>\
+</div>\
+<div class="small-7 left columns">\
+<input type="file" id="ly_hrmbundle_crewinfo_certificate_'+index+'_path" name="ly_hrmbundle_crewinfo[certificate]['+index+'][path]">\
+</div>\
+</div>\
+</div>\
+</div>\
+</div>\
+<input type="hidden" id="ly_hrmbundle_crewinfo_certificate_'+index+'_pathsave" name="ly_hrmbundle_crewinfo[certificate]['+index+'][pathsave]">\
+<div class="left small-11 columns ">\
+<label class="delete label alert right"  onclick="$(this).closest(\'.certificatefield\').slideUp(function() { $(this).closest(\'.certificatefield\').remove(); });">Delete</label>\
+</div>\
+</fieldset>';
+	    
+	    $('.infoedit').append($newform);
+		
+		$(".datepicker").datetimepicker({
+			format:'d/m/Y'
+		});
+		
+		return ++index;
+	   }
+	</script>
+{% endblock %}
+

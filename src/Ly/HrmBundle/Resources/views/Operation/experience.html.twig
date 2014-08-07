@@ -1,0 +1,240 @@
+{% extends 'LyHrmBundle::baseframe.html.twig' %}
+
+
+
+{% block title %}Edit Experience{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+
+
+   
+	<div class="row">
+		<div class="small-12 columns">
+			<h1>{{ crew.name }} <span class="subtitle gray">{{ crew.craft }}</span></h1>
+			<hr />
+			{{ form_start(form, {'attr': {'id': 'form_experience'}}) }}
+	   	 	{# render the task's only field: description #}
+		    <div class="experience">
+		        {# iterate over each existing tag and render its only field: name #}
+		        {% for experience in form.experience %}
+		        <fieldset class="experiencefieldset">
+			        <div class="experiencenode small-6 columns ">		        	
+		        		<div class="row">
+					        <div class="small-3 columns">
+					          	<label class="left inline">{{ form_label(experience.company) }}</label>
+					        </div>
+					        <div class="small-7 left columns">
+					          	{{ form_widget(experience.company) }}
+					        </div>
+					    </div>
+			        </div>
+			        <div class="experiencenode small-6 columns ">		        	
+		        		<div class="row">
+					        <div class="small-3 columns">
+					          	<label class="left inline">{{ form_label(experience.location) }}</label>
+					        </div>
+					        <div class="small-7 left columns">
+					          	{{ form_widget(experience.location) }}
+					        </div>
+					    </div>
+			        </div>
+			        <div class="experiencenode small-6 columns ">		        	
+		        		<div class="row">
+					        <div class="small-3 columns">
+					          	<label class="left inline">{{ form_label(experience.position) }}</label>
+					        </div>
+					        <div class="small-7 left columns">
+					          	{{ form_widget(experience.position) }}
+					        </div>
+					    </div>
+			        </div>
+			        <div class="experiencenode small-6 columns ">		        	
+		        		<div class="row">
+					        <div class="small-3 columns">
+					          	<label class="left inline">{{ form_label(experience.project) }}</label>
+					        </div>
+					        <div class="small-7 left columns">
+					          	{{ form_widget(experience.project) }}
+					        </div>
+					    </div>
+			        </div>
+			        <div class="experiencenode small-6 columns ">		        	
+		        		<div class="row">
+					        <div class="small-3 columns">
+					          	<label class="left inline">{{ form_label(experience.startdate) }}</label>
+					        </div>
+					        <div class="small-7 left columns">
+					          	{{ form_widget(experience.startdate) }}
+					        </div>
+					    </div>
+			        </div>
+			        <div class="experiencenode small-6 columns ">		        	
+		        		<div class="row">
+					        <div class="small-3 columns">
+					          	<label class="left inline">{{ form_label(experience.enddate) }}</label>
+					        </div>
+					        <div class="small-7 left columns">
+					          	{{ form_widget(experience.enddate) }}
+					        </div>
+					    </div>
+			        </div>
+			        <div class="experiencenode small-12 columns ">		        	
+		        		<div class="row">
+					        <div class="small-1 columns">
+					          	<label class="left inline">{{ form_label(experience.description) }}</label>
+					        </div>
+					        <div class="left small-10 columns">
+					          	{{ form_widget(experience.description) }}
+					        </div>
+					    </div>
+			        </div>	
+			        <div class="experiencenode left small-11 columns ">	
+			        	<a class="delete label alert right" href="#">Delete</a>
+			        </div>	
+		        </fieldset>
+			    {% endfor %}    
+	        </div>
+			<div class="small-12 columns">
+				<ul class="button-group radius right">
+				    <li><a href="javascript:{}" class="small button" id="addex">Add Experience</a></li>
+				    <li>{{ form_widget(form.submit) }}</li>
+				</ul>      	    
+		    
+		    	 
+	  		</div>
+		{{ form_end(form) }}
+		</div>
+	</div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	
+	
+<script type="text/javascript">
+	var $addTagLink = $('#addex');
+
+	$(document).ready(function() {
+	    // Get the ul that holds the collection of tags
+	   
+		var index = $('div.experience').find('fieldset').length;
+	    $addTagLink.on('click', function(e) {
+	        // prevent the link from creating a "#" on the URL
+	        e.preventDefault();
+	        
+			
+	        // add a new tag form (see next code block)
+	        index = addTagForm($addTagLink,index);
+	    });
+	    
+	    $(".delete").click(function(e) {
+	    	e.preventDefault();
+	    	
+		    $(this).closest('.experiencefieldset').slideUp('normal', function() { $(this).closest('.experiencefieldset').remove(); });
+
+		});
+		
+	    
+	});
+	
+	function addTagForm($newLinkLi,index) {
+
+	    var $newform = '<fieldset class="experiencefieldset">\
+<div class="experiencenode small-6 columns ">\
+<div class="row">\
+<div class="small-3 columns">\
+<label class="left inline"><label for="ly_hrmbundle_crewinfo_experience_'+index+'_company" class="required">Company</label></label>\
+</div>\
+<div class="small-7 left columns">\
+<input type="text" id="ly_hrmbundle_crewinfo_experience_'+index+'_company" name="ly_hrmbundle_crewinfo[experience]['+index+'][company]" required="required" value="">\
+</div>\
+</div>\
+</div>\
+<div class="experiencenode small-6 columns ">\
+<div class="row">\
+<div class="small-3 columns">\
+<label class="left inline"><label for="ly_hrmbundle_crewinfo_experience_'+index+'_location" class="required">Location</label></label>\
+</div>\
+<div class="small-7 left columns">\
+<input type="text" id="ly_hrmbundle_crewinfo_experience_'+index+'_location" name="ly_hrmbundle_crewinfo[experience]['+index+'][location]" required="required" value="">\
+</div>\
+</div>\
+</div>\
+<div class="experiencenode small-6 columns ">\
+<div class="row">\
+<div class="small-3 columns">\
+<label class="left inline"><label for="ly_hrmbundle_crewinfo_experience_'+index+'_position" class="required">Position Held</label></label>\
+</div>\
+<div class="small-7 left columns">\
+<input type="text" id="ly_hrmbundle_crewinfo_experience_'+index+'_position" name="ly_hrmbundle_crewinfo[experience]['+index+'][position]" required="required" value="">\
+</div>\
+</div>\
+</div>\
+<div class="experiencenode small-6 columns ">\
+<div class="row">\
+<div class="small-3 columns">\
+<label class="left inline"><label for="ly_hrmbundle_crewinfo_experience_'+index+'_project" class="required">Project</label></label>\
+</div>\
+<div class="small-7 left columns">\
+<input type="text" id="ly_hrmbundle_crewinfo_experience_'+index+'_project" name="ly_hrmbundle_crewinfo[experience]['+index+'][project]" required="required" value="">\
+</div>\
+</div>\
+</div>\
+<div class="experiencenode small-6 columns ">\
+<div class="row">\
+<div class="small-3 columns">\
+<label class="left inline"><label for="ly_hrmbundle_crewinfo_experience_'+index+'_startdate" class="required">Start Date</label></label>\
+</div>\
+<div class="small-7 left columns">\
+<input type="text" class="datepicker" placeholder="DD/MM/YYYY" id="ly_hrmbundle_crewinfo_experience_'+index+'_startdate" name="ly_hrmbundle_crewinfo[experience]['+index+'][startdate]" value="">\
+</div>\
+</div>\
+</div>\
+<div class="experiencenode small-6 columns ">\
+<div class="row">\
+<div class="small-3 columns">\
+<label class="left inline"><label for="ly_hrmbundle_crewinfo_experience_'+index+'_enddate" class="required">End date</label></label>\
+</div>\
+<div class="small-7 left columns">\
+<input type="text" class="datepicker" placeholder="DD/MM/YYYY" id="ly_hrmbundle_crewinfo_experience_'+index+'_enddate" name="ly_hrmbundle_crewinfo[experience]['+index+'][enddate]" value="">\
+</div>\
+</div>\
+</div>\
+<div class="experiencenode small-12 columns ">\
+<div class="row">\
+<div class="small-1 columns">\
+<label class="left inline"><label for="ly_hrmbundle_crewinfo_experience_'+index+'_description" class="required">Description</label></label>\
+</div>\
+<div class="left small-10 columns">\
+<textarea id="ly_hrmbundle_crewinfo_experience_'+index+'_description" name="ly_hrmbundle_crewinfo[experience]['+index+'][description]" required="required"></textarea>\
+</div>\
+</div>\
+</div>\
+<div class="experiencenode left small-11 columns ">\
+<label class="delete label alert right" onclick="$(this).closest(\'.experiencefieldset\').slideUp(function() { $(this).closest(\'.experiencefieldset\').remove(); });">Delete</label>\
+</div>\
+</fieldset>';
+
+		$('.experience').append($newform);
+		
+		$(".datepicker").datetimepicker({
+			format:'d/m/Y'
+		});
+		
+		return ++index;
+		
+	}
+	
+	
+	
+</script>
+{% endblock %}
+
+

@@ -1,0 +1,153 @@
+{% extends 'LyHrmBundle::baseframe.html.twig' %}
+
+
+
+{% block title %}Mob Records{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+	
+	<div class="row">
+		<div class="small-12 columns">	
+			<h1>{{ mobgroup.record }}<span class="subtitle gray"> Manning Level: {{ mobgroup.crewamount }}</span></h1>
+			<hr  />
+			
+			{{ form_start(form, {'attr': {'id': 'form_mobedit'}}) }}
+			
+			<fieldset class="mobgroupfieldset">				
+				<div class=" small-12 columns ">
+			    	<div class="row">
+						<div class=" small-6 columns ">		        	
+			        		<div class="row">
+						        <div class="small-3 columns">
+						          	<label class="left inline">{{ form_label(form.record) }}</label>
+						        </div>
+						        <div class="small-7 left columns">
+						          	{{ form_widget(form.record) }}
+						        </div>
+						    </div>
+					    </div>
+					    <div class="small-6 columns ">		        	
+			        		<div class="row">
+						        <div class="small-3 columns">
+						          	<label class="left inline">{{ form_label(form.vessel) }}</label>
+						        </div>
+						        <div class="small-7 left columns">
+						          	{{ form_widget(form.vessel) }}
+						        </div>
+						    </div>
+					    </div>
+					    
+				    </div>
+				</div>
+				<div class="small-12 columns ">
+			    	<div class="row">
+						<div class="small-6 columns ">		        	
+			        		<div class="row">
+						        <div class="small-3 columns">
+						          	<label class="left inline">{{ form_label(form.company) }}</label>
+						        </div>
+						        <div class="small-7 left columns">
+						          	{{ form_widget(form.company) }}
+						        </div>
+						    </div>
+					    </div>
+					    <div class=" small-6 columns ">		        	
+			        		<div class="row">
+						        <div class="small-3 columns">
+						          	<label class="left inline">{{ form_label(form.mobdate) }}</label>
+						        </div>
+						        <div class="small-7 left columns">
+						          	{{ form_widget(form.mobdate) }}
+						        </div>
+						    </div>
+					    </div>
+				    </div>
+				</div>
+				<div class=" small-12 columns ">
+			    	<div class="row">
+						<div class=" small-6 columns ">		        	
+			        		<div class="row">
+						        <div class="small-3 columns">
+						          	<label class="left inline">{{ form_label(form.project) }}</label>
+						        </div>
+						        <div class="small-7 left columns">
+						          	{{ form_widget(form.project) }}
+						        </div>
+						    </div>
+					    </div>
+					    <div class=" small-6 columns ">		        	
+			        		<div class="row">
+						        <div class="small-3 columns">
+						          	<label class="left inline">{{ form_label(form.description) }}</label>
+						        </div>
+						        <div class="small-7 left columns">
+						          	{{ form_widget(form.description) }}
+						        </div>
+						    </div>
+					    </div>
+				    </div>
+				</div>
+			</fieldset>
+			<table class="stripe responsive">
+				<thead>
+					<tr>
+						<th>Contract</th>
+						<th>Name</th>
+						<th>Start Date</th>
+						<th>End Date</th>
+						<th>Rate</th>
+						<th>Remarks</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					
+					{% for key,mobrecord in form.mobrecord %}
+					
+						<tr>
+							<td>{{ mobgroup.mobrecord[key].fromid.contractno }}</td>
+							<td><a href="{{ path('info_show', {'id' : mobgroup.mobrecord[key].fromid.id}) }}">{{ mobgroup.mobrecord[key].fromid.name }}</a></td>
+							<td>{{ form_widget(mobrecord.startdate) }}{{ form_errors(mobrecord.startdate) }}</td>
+							
+							<td>{{ form_widget(mobrecord.enddate) }}{{ form_errors(mobrecord.enddate) }}</td>
+							
+							<td>{{ form_widget(mobrecord.rate) }}</td>
+							<td>{{ form_widget(mobrecord.remark) }}</td>
+						</tr>
+						
+					{% endfor %}
+				</tbody>
+			</table>
+			<div class="small-12 columns">
+				<ul class="button-group radius right">
+				    
+				    <li>{{ form_widget(form.submit) }}</li>
+				    <li><a href="{{ path('drop_mob', {'id' : mobgroup.id }) }}" class="small button alert">Drop Record</a></li>
+				</ul>      	    
+		    
+		    	 
+	  		</div>
+			{{ form_end(form) }}
+		</div>	
+	</div>		
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script type="text/javascript">
+		$('#ly_hrmbundle_mobgroup_vessel').on('change', function ()
+			{
+			    var label = $(this.options[this.selectedIndex]).closest('optgroup').prop('label');
+			    $('#ly_hrmbundle_mobgroup_company').val(label);
+			});
+	</script>
+{% endblock %}	
+

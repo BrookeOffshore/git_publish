@@ -1,0 +1,135 @@
+{% extends 'LyHrmBundle::baseframe.html.twig' %}
+
+
+
+{% block title %}Mob Records Brief{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+	
+	<div class="row">
+		<div class="small-12 columns">	
+			<h1>Mobilization Records <span class="subtitle gray">Default sorted by start date</span></h1>
+			<hr  />
+			<div class="row" data-equalizer>
+				<form action="{{ path('mob_search') }}" method="post" {{ form_enctype(form) }}>
+					<div class="small-8 columns" data-equalizer-watch>
+					
+						<fieldset>
+							<br  />
+							<div class="small-6 columns ">
+								<div class="row">
+							        <div class="small-3 columns">
+							        	<label class="left inline">{{ form_label(form.company) }}</label>
+							        </div>
+							        <div class="small-7 left columns">
+							        	{{ form_widget(form.company) }}
+							        </div>
+							     </div>					        
+							</div>
+							
+							<div class="small-6 columns ">
+								<div class="row">
+							        <div class="small-3 columns">
+							        	<label class="left inline">{{ form_label(form.vessel) }}</label>
+							        </div>
+							        <div class="small-7 left columns">
+							        	{{ form_widget(form.vessel) }}
+							        </div>
+							     </div>					        
+							</div>
+							
+							<div class="small-6 columns ">
+								<div class="row">
+							        <div class="small-3 columns">
+							        	<label class="left inline">{{ form_label(form.fromdate) }}</label>
+							        </div>
+							        <div class="small-7 left columns">
+							        	{{ form_widget(form.fromdate) }}
+							        </div>
+							     </div>					        
+							</div>
+							
+							<div class="small-6 columns ">
+								<div class="row">
+							        <div class="small-3 columns">
+							        	<label class="left inline">{{ form_label(form.todate) }}</label>
+							        </div>
+							        <div class="small-7 left columns">
+							        	{{ form_widget(form.todate) }}
+							        </div>
+							     </div>					        
+							</div>
+							
+							<div class="small-6 columns ">
+								<div class="row">
+							        <div class="small-3 columns">
+							        	<label class="left inline">{{ form_label(form.preparedby) }}</label>
+							        </div>
+							        <div class="small-7 left columns">
+							        	{{ form_widget(form.preparedby) }}
+							        </div>
+							     </div>					        
+							</div>
+							
+							<div class="small-6 columns ">
+								<div class="row">
+							        <div class="small-10 columns">
+							        	<button class="radius button small rightbutton right " href="#">Search</button>
+							        </div>
+							     </div>					        
+							</div>
+
+						</fieldset>
+					
+					</div>
+				
+				</form>				
+			</div>
+			
+			<br />
+			
+			<table class="stripe responsive">
+		        <thead>
+		            <tr>
+		            	<th>Record Code</th>
+		            	<th>Company</th>
+		            	<th>Vessel</th>
+		            	<th>Project</th>
+		            	<th>Mobilization Date</th>
+		            	<th>Manning Level</th>
+		            	<th>Description</th>
+		            	<th>Prepared By</th>
+		            </tr>
+		        </thead>
+		        <tbody>
+		        {% for mobgroup in mobgroup %}
+		            <tr>
+    		           <td><a href="{{ path('mobrecord_detail', { 'mobgroupid' : mobgroup.id }) }}">{{ mobgroup.record }}</a></td>
+    		           <td>{{ mobgroup.company }}</td>
+    		           <td>{{ mobgroup.vessel }}</td>
+    		           <td>{{ mobgroup.project }}</td>
+    		           <td>{{ mobgroup.mobdate|date('d/M/Y') }}</td>
+    		           <td>{{ mobgroup.crewamount }}</td>
+    		           <td>{{ mobgroup.description }}</td>
+    		           <td>{{ mobgroup.preparedby }}</td>
+		            </tr>
+		        {% endfor %}
+		        </tbody>
+	    	</table>
+		    		
+		</div>
+	</div>
+    
+	
+       
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	
+{% endblock %}
